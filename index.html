@@ -50,10 +50,6 @@
   </script>
 
   <style>
-    html, body {
-      overflow-x: hidden;
-      max-width: 100vw;
-    }
     body {
       background-color: #121212;
       color: #e5e7eb;
@@ -110,6 +106,7 @@
         headline: "Results-driven Store Manager with 2+ years of experience in fast-paced Quick Commerce dark stores (Swiggy Instamart, Blinkit, Shadowfax).",
         location: "Chennai, Tamil Nadu, India",
         email: "l.suryaprasath1@gmail.com",
+        phone: "+91 6382799407",
         whatsapp: "https://wa.me/916382799407",
         linkedin: "https://www.linkedin.com/in/surya-prasath-65b79837b/",
         experienceYears: "2+",
@@ -117,7 +114,7 @@
         accuracy: "99.8%",
         tat: "< 2.2 min",
         shrinkage: "< 0.25%",
-        imagePath: "/surya-prasath-portrait.png"
+        imagePath: "./surya-prasath.jpg?v=2"
       },
 
       statsCard: [
@@ -339,7 +336,6 @@
 
     function App() {
       const [activeTab, setActiveTab] = useState("home");
-      const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
       const [activeWorkflowStep, setActiveWorkflowStep] = useState(0);
       const [selectedCaseStudy, setSelectedCaseStudy] = useState(null);
       const [showResumeModal, setShowResumeModal] = useState(false);
@@ -354,13 +350,9 @@
 
       const handleContactSubmit = (e) => {
         e.preventDefault();
-        const subject = encodeURIComponent(`Portfolio Message from ${contactForm.name || 'Recruiter'}`);
-        const body = encodeURIComponent(
-          `Hello Surya,\n\nName: ${contactForm.name}\nEmail: ${contactForm.email}\n\nMessage:\n${contactForm.message}\n\n--\nSent from your portfolio website`
-        );
-        window.location.href = `mailto:${suryaData.personal.email}?subject=${subject}&body=${body}`;
         setContactSent(true);
-        setTimeout(() => setContactSent(false), 8000);
+        setTimeout(() => setContactSent(false), 5000);
+        setContactForm({ name: "", email: "", message: "" });
       };
 
       return (
@@ -415,7 +407,7 @@
                 </a>
               </nav>
 
-              {/* Top Right "Hire Me" Button + Mobile Hamburger matching screenshot */}
+              {/* Top Right "Hire Me" Button matching screenshot */}
               <div className="flex items-center gap-3">
                 <button 
                   onClick={() => setShowResumeModal(true)}
@@ -427,87 +419,21 @@
 
                 <a 
                   href="#contact"
-                  className="hidden sm:inline-block px-6 py-2.5 rounded-lg bg-accent hover:bg-accent-hover text-white text-sm font-semibold shadow-md transition shadow-accent/20"
+                  className="px-6 py-2.5 rounded-lg bg-accent hover:bg-accent-hover text-white text-sm font-semibold shadow-md transition shadow-accent/20"
                 >
                   Hire Me
                 </a>
-
-                {/* Mobile Hamburger Toggle */}
-                <button
-                  type="button"
-                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                  className="md:hidden p-2 rounded-lg border border-dark-750 bg-dark-800 text-slate-300 hover:text-white hover:border-accent"
-                  aria-label="Toggle Navigation Menu"
-                >
-                  <i data-lucide={mobileMenuOpen ? "x" : "menu"} className="w-5 h-5"></i>
-                </button>
               </div>
             </div>
-
-            {/* Mobile Dropdown Menu */}
-            {mobileMenuOpen && (
-              <div className="md:hidden border-t border-dark-800 bg-dark-900/98 px-6 py-4 space-y-3">
-                <a 
-                  href="#home" 
-                  onClick={() => { setActiveTab("home"); setMobileMenuOpen(false); }}
-                  className={`block py-2 text-sm font-medium ${activeTab === 'home' ? 'text-accent font-semibold' : 'text-slate-300'}`}
-                >
-                  Home
-                </a>
-                <a 
-                  href="#services" 
-                  onClick={() => { setActiveTab("services"); setMobileMenuOpen(false); }}
-                  className={`block py-2 text-sm font-medium ${activeTab === 'services' ? 'text-accent font-semibold' : 'text-slate-300'}`}
-                >
-                  Services
-                </a>
-                <a 
-                  href="#about" 
-                  onClick={() => { setActiveTab("about"); setMobileMenuOpen(false); }}
-                  className={`block py-2 text-sm font-medium ${activeTab === 'about' ? 'text-accent font-semibold' : 'text-slate-300'}`}
-                >
-                  About me
-                </a>
-                <a 
-                  href="#portfolio" 
-                  onClick={() => { setActiveTab("portfolio"); setMobileMenuOpen(false); }}
-                  className={`block py-2 text-sm font-medium ${activeTab === 'portfolio' ? 'text-accent font-semibold' : 'text-slate-300'}`}
-                >
-                  Portfolio
-                </a>
-                <a 
-                  href="#contact" 
-                  onClick={() => { setActiveTab("contact"); setMobileMenuOpen(false); }}
-                  className={`block py-2 text-sm font-medium ${activeTab === 'contact' ? 'text-accent font-semibold' : 'text-slate-300'}`}
-                >
-                  Contact me
-                </a>
-                <div className="pt-2 flex items-center gap-3">
-                  <button 
-                    onClick={() => { setShowResumeModal(true); setMobileMenuOpen(false); }}
-                    className="flex-1 py-2 text-xs font-semibold border border-dark-700 rounded-lg text-slate-200 text-center"
-                  >
-                    Resume
-                  </button>
-                  <a 
-                    href="#contact" 
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="flex-1 py-2 text-xs font-semibold bg-accent text-white rounded-lg text-center"
-                  >
-                    Hire Me
-                  </a>
-                </div>
-              </div>
-            )}
           </header>
 
           {/* HERO SECTION matching the mockup image */}
-          <section id="home" className="relative pt-8 pb-16 sm:pt-12 sm:pb-20 lg:pt-20 lg:pb-32 overflow-hidden border-b border-dark-800">
+          <section id="home" className="relative pt-12 pb-20 lg:pt-20 lg:pb-32 overflow-hidden border-b border-dark-800">
             {/* Subtle warm orange ambient light */}
-            <div className="absolute top-1/3 left-1/4 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-accent/10 rounded-full blur-[140px] pointer-events-none"></div>
+            <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-accent/10 rounded-full blur-[140px] pointer-events-none"></div>
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
-              <div className="grid lg:grid-cols-12 gap-8 lg:gap-8 items-center">
+            <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+              <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
                 
                 {/* Left Column: Headline, Bio & Actions */}
                 <div className="lg:col-span-7 space-y-6">
@@ -524,10 +450,10 @@
 
                   {/* Huge Bold Title in Vibrant Orange matching screenshot */}
                   <div>
-                    <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-accent leading-[1.08] tracking-tight">
+                    <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-accent leading-[1.05] tracking-tight">
                       {suryaData.personal.roleHighlight}
                     </h1>
-                    <div className="text-base sm:text-xl font-medium text-slate-300 mt-2">
+                    <div className="text-lg sm:text-xl font-medium text-slate-300 mt-2">
                       {suryaData.personal.roleSubtitle}
                     </div>
                   </div>
@@ -542,6 +468,13 @@
                       className="w-10 h-10 rounded-full border border-dark-700 bg-dark-800 hover:border-accent hover:text-accent flex items-center justify-center text-slate-300 transition"
                     >
                       <i data-lucide="message-circle" className="w-4 h-4"></i>
+                    </a>
+                    <a 
+                      href={`tel:${suryaData.personal.phone}`} 
+                      title="Call"
+                      className="w-10 h-10 rounded-full border border-dark-700 bg-dark-800 hover:border-accent hover:text-accent flex items-center justify-center text-slate-300 transition"
+                    >
+                      <i data-lucide="phone" className="w-4 h-4"></i>
                     </a>
                     <a 
                       href={`mailto:${suryaData.personal.email}`} 
@@ -581,17 +514,17 @@
                   </div>
 
                   {/* Bottom Stats Floating Card matching screenshot */}
-                  <div className="pt-4 sm:pt-6">
-                    <div className="rounded-2xl bg-dark-850/80 border border-dark-750 backdrop-blur-md p-4 sm:p-6 grid grid-cols-3 gap-2 sm:gap-4 shadow-xl">
+                  <div className="pt-6">
+                    <div className="rounded-2xl bg-dark-850/80 border border-dark-750 backdrop-blur-md p-5 sm:p-6 grid grid-cols-3 gap-4 shadow-xl">
                       {suryaData.statsCard.map((st, idx) => (
                         <div key={idx} className="space-y-0.5">
-                          <div className="text-xl sm:text-3xl font-extrabold text-accent">
+                          <div className="text-2xl sm:text-3xl font-extrabold text-accent">
                             {st.value}
                           </div>
-                          <div className="text-[11px] sm:text-xs font-semibold text-white leading-tight">
+                          <div className="text-xs font-semibold text-white">
                             {st.label}
                           </div>
-                          <div className="text-[10px] sm:text-[11px] text-slate-400 hidden sm:block">
+                          <div className="text-[11px] text-slate-400 hidden sm:block">
                             {st.sub}
                           </div>
                         </div>
@@ -618,17 +551,21 @@
                       zIndex:1
                     }}></div>
 
-                    {/* Portrait is shown as supplied, without filters or masks. */}
+                    {/* Person photo: mix-blend-mode:screen makes the dark studio BG disappear into the page */}
                     <div className="relative w-full flex items-end justify-center" style={{zIndex:2}}>
                       <img
-                        src={suryaData.personal.imagePath}
-                        alt={`${suryaData.personal.name} - Store Manager`}
+                        src="./surya-prasath.jpg"
+                        alt="Surya Prasath - Store Manager"
                         style={{
                           width:'100%',
                           maxHeight:'600px',
                           objectFit:'contain',
                           objectPosition:'bottom',
+                          mixBlendMode:'screen',
+                          filter:'grayscale(100%) contrast(1.15) brightness(1.08)',
                           display:'block',
+                          WebkitMaskImage:'radial-gradient(ellipse 72% 88% at 50% 58%, black 42%, transparent 78%)',
+                          maskImage:'radial-gradient(ellipse 72% 88% at 50% 58%, black 42%, transparent 78%)'
                         }}
                       />
                     </div>
@@ -971,11 +908,23 @@
                         </div>
                         <div>
                           <div className="text-xs font-semibold text-slate-400">WhatsApp Chat</div>
-                          <div className="text-sm font-bold text-white">Message on WhatsApp</div>
+                          <div className="text-sm font-bold text-white">+91 6382799407</div>
                         </div>
                       </div>
                       <i data-lucide="arrow-right" className="w-4 h-4 text-slate-400 group-hover:text-accent transition"></i>
                     </a>
+
+                    <div className="p-4 rounded-xl bg-dark-800 border border-dark-700 flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-accent text-white flex items-center justify-center">
+                        <i data-lucide="phone" className="w-5 h-5"></i>
+                      </div>
+                      <div>
+                        <div className="text-xs font-semibold text-slate-400">Direct Phone</div>
+                        <a href={`tel:${suryaData.personal.phone}`} className="text-sm font-bold text-white hover:text-accent transition">
+                          {suryaData.personal.phone}
+                        </a>
+                      </div>
+                    </div>
 
                     <div className="p-4 rounded-xl bg-dark-800 border border-dark-700 flex items-center gap-3">
                       <div className="w-10 h-10 rounded-lg bg-dark-750 text-accent flex items-center justify-center border border-dark-700">
@@ -1007,16 +956,13 @@
 
                 {/* Direct Message Form */}
                 <div className="lg:col-span-7">
-                  <div className="p-6 sm:p-8 rounded-2xl bg-dark-800 border border-dark-750 shadow-xl space-y-4">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-lg font-bold text-white">Send a Message</h3>
-                      <span className="text-[11px] px-2.5 py-1 rounded-full bg-accent/10 border border-accent/30 text-accent font-medium">Direct to Email</span>
-                    </div>
+                  <div className="p-8 rounded-2xl bg-dark-800 border border-dark-750 shadow-xl space-y-4">
+                    <h3 className="text-lg font-bold text-white">Send a Message</h3>
 
                     {contactSent && (
-                      <div className="p-3.5 rounded-xl bg-emerald-500/15 border border-emerald-500/40 text-xs text-emerald-300 flex items-center gap-2">
-                        <i data-lucide="check-circle" className="w-4 h-4 text-emerald-400 shrink-0"></i>
-                        Opening your email app to send message directly to Surya Prasath ({suryaData.personal.email})!
+                      <div className="p-3.5 rounded-xl bg-accent/20 border border-accent text-xs text-white flex items-center gap-2">
+                        <i data-lucide="check-circle" className="w-4 h-4 text-accent"></i>
+                        Thank you! Your message has been sent to Surya Prasath.
                       </div>
                     )}
 
@@ -1034,7 +980,7 @@
                           />
                         </div>
                         <div>
-                          <label className="block text-xs font-semibold text-slate-400 mb-1">Your Email</label>
+                          <label className="block text-xs font-semibold text-slate-400 mb-1">Email</label>
                           <input 
                             type="email" 
                             required
@@ -1060,10 +1006,9 @@
 
                       <button 
                         type="submit"
-                        className="w-full py-3 rounded-lg bg-accent hover:bg-accent-hover text-white font-bold text-sm shadow-md transition flex items-center justify-center gap-2"
+                        className="w-full py-3 rounded-lg bg-accent hover:bg-accent-hover text-white font-bold text-sm shadow-md transition"
                       >
-                        <i data-lucide="mail" className="w-4 h-4"></i>
-                        <span>Send Message to l.suryaprasath1@gmail.com</span>
+                        Send Message
                       </button>
                     </form>
                   </div>
@@ -1177,6 +1122,8 @@
                         <span>{suryaData.personal.location}</span>
                         <span>&bull;</span>
                         <span>{suryaData.personal.email}</span>
+                        <span>&bull;</span>
+                        <span>{suryaData.personal.phone}</span>
                       </div>
                     </div>
                     <img 
@@ -1236,5 +1183,4 @@
   </script>
 </body>
 </html>
-
 
