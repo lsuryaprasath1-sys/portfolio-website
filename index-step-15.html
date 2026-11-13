@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alex Morgan | Retail Store General Manager Portfolio</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- React 18 & Babel Standalone -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              200: '#bbf7d0',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+            },
+            navy: {
+              800: '#111827',
+              850: '#0f172a',
+              900: '#0b0f19',
+              950: '#06090e',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #printable-resume, #printable-resume * {
+        visibility: visible;
+      }
+      #printable-resume {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        background: white !important;
+        color: black !important;
+      }
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.05);
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(16, 185, 129, 0.3);
+      border-radius: 9999px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: rgba(16, 185, 129, 0.6);
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-navy-950 dark:text-slate-100 transition-colors duration-200 antialiased selection:bg-emerald-500 selection:text-white">
+  <div id="root"></div>
+
+  <!-- React Application Script -->
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    // Portfolio Data
+    const portfolioData = {
+      personal: {
+        name: "Alex Morgan",
+        roleTitle: "Retail Store General Manager",
+        headline: "Retail Operations Leader | P&L Optimization, High-Retention Team Building & Omnichannel Growth",
+        subheadline: "10+ years transforming high-volume flagship retail stores into regional top-performers through disciplined inventory control, sales coaching, and customer experience excellence.",
+        location: "Chicago, IL (Open to Relocation & Multi-Unit)",
+        email: "alex.morgan.retail@example.com",
+        phone: "(555) 382-9410",
+        linkedin: "https://linkedin.com/in/alexmorgan-retail",
+        availability: "Available for Store GM & District Leadership",
+        annualRevenueManaged: "$14.5M+",
+        teamSizeLed: "45+ Associates",
+      },
+      heroStats: [
+        { label: "Annual Revenue Managed", value: "$14.5M", change: "+18.4% YoY", trend: "up", sub: "Top 2% in Region" },
+        { label: "Target Quota Attainment", value: "114%", change: "Ranked #1 Store", trend: "up", sub: "8 Consecutive Quarters" },
+        { label: "Inventory Shrink Rate", value: "0.52%", change: "vs 1.8% Industry Avg", trend: "down-good", sub: "$215K EBITDA Saved" },
+        { label: "Staff Retention Rate", value: "88%", change: "+34% Improvement", trend: "up", sub: "6 Leaders Promoted" },
+      ],
+      kpis: [
+        {
+          id: "revenue",
+          title: "P&L & Sales Performance",
+          metric: "$14.5M Volume / 114% to Plan",
+          category: "Financial Leadership",
+          summary: "Consistently delivered double-digit top-line growth while maintaining tight labor and clearance margin control.",
+          points: [
+            "Increased Units Per Transaction (UPT) from 2.1 to 3.4 through active consultative selling and fitting room styling initiatives.",
+            "Lifted Average Order Value (AOV) by 19% via high-margin impulse placements and cashier cross-sell incentives.",
+            "Expanded store gross margin by +4.2% through disciplined markdown pacing and shrinkage mitigation."
+          ],
+          barData: [
+            { label: "Q1 Target vs Actual", target: 85, actual: 94 },
+            { label: "Q2 Target vs Actual", target: 88, actual: 102 },
+            { label: "Q3 Target vs Actual", target: 92, actual: 108 },
+            { label: "Q4 Holiday Target vs Actual", target: 95, actual: 114 },
+          ]
+        },
+        {
+          id: "shrinkage",
+          title: "Asset Protection & Inventory Control",
+          metric: "0.52% Shrink (vs 1.8% Industry Avg)",
+          category: "Operations & Risk Mitigation",
+          summary: "Transformed a high-risk inventory environment into the benchmark store for asset protection in the Midwest region.",
+          points: [
+            "Instituted strict twice-weekly cycle counts on high-theft designer SKUs, achieving 99.4% book-to-physical inventory accuracy.",
+            "Redesigned front-of-store sightlines, cash wrap zones, and fitting room greeting checkpoints.",
+            "Scored 98.5% on annual Corporate Loss Prevention & Safety Compliance Audit."
+          ],
+          barData: [
+            { label: "Initial High-Risk State", target: 50, actual: 95, note: "2.1% Shrink (Severe Loss)" },
+            { label: "Phase 1 - 5S & Cycle Counts", target: 50, actual: 65, note: "1.4% Shrink" },
+            { label: "Phase 2 - Fitting Room Protocols", target: 50, actual: 40, note: "0.8% Shrink" },
+            { label: "Current Benchmark Performance", target: 50, actual: 25, note: "0.52% Shrink (Industry Leading)" },
+          ]
+        },
+        {
+          id: "retention",
+          title: "People Leadership & High-Retention Culture",
+          metric: "88% Retention / 40% Less Turnover",
+          category: "Talent Development",
+          summary: "Fostered a collaborative, accountability-driven culture that reduced costly associate turnover and built a managerial talent bench.",
+          points: [
+            "Promoted 6 frontline sales and stock associates into Department Supervisors and Assistant Store Managers.",
+            "Designed a 14-day 'Retail Mastery' onboarding program adopted across the entire 42-store district.",
+            "Achieved a 92% employee satisfaction rating on anonymous annual internal pulse surveys."
+          ],
+          barData: [
+            { label: "District Average Retention", target: 70, actual: 58 },
+            { label: "Flagship Prior to Leadership", target: 70, actual: 54 },
+            { label: "Year 1 Leadership Impact", target: 70, actual: 75 },
+            { label: "Current Sustained Retention", target: 70, actual: 88 },
+          ]
+        },
+        {
+          id: "omnichannel",
+          title: "Omnichannel Fulfillment & Customer Experience",
+          metric: "92 NPS / 99.6% BOPIS SLA",
+          category: "Customer Service & Tech",
+          summary: "Engineered high-speed Ship-from-Store (SFS) and Buy Online Pick Up in Store (BOPIS) fulfillment without impacting floor guest interactions.",
+          points: [
+            "Fulfilled 350+ daily digital orders with 99.6% on-time pickup compliance during peak Q4 volume.",
+            "Elevated store Net Promoter Score (NPS) from 68 to 92 through personalized VIP clienteling sessions.",
+            "Ranked #1 in region for loyalty rewards program acquisition (1,200+ new accounts enrolled monthly)."
+          ],
+          barData: [
+            { label: "BOPIS On-Time Fulfillment", target: 95, actual: 99.6 },
+            { label: "Customer NPS Score", target: 75, actual: 92 },
+            { label: "Loyalty Acquisition Quota", target: 100, actual: 128 },
+            { label: "In-Store Pick SLA (<15 Mins)", target: 90, actual: 97.4 },
+          ]
+        }
+      ],
+      competencyCategories: [
+        {
+          title: "Operations & P&L Leadership",
+          icon: "calculator",
+          color: "emerald",
+          description: "Full store EBITDA management, budget forecasting, and operational rigor.",
+          skills: [
+            "Annual & Quarterly P&L Management",
+            "Payroll-to-Sales Labor Optimization (Target 8.9%)",
+            "Asset Protection & Shrinkage Mitigation",
+            "Bi-Weekly Cycle Counts & Full Physical Audits",
+            "OSHA, Safety Standards & Crisis Protocols",
+            "Vendor Shipments & Stockroom 5S Workflows"
+          ]
+        },
+        {
+          title: "People & Talent Development",
+          icon: "users",
+          color: "blue",
+          description: "Building engaged, loyal, and consultative sales teams that consistently win.",
+          skills: [
+            "Recruiting, Vetting & High-Volume Hiring",
+            "Consultative Selling & Upsell Coaching",
+            "Leadership Succession Planning & Promotion",
+            "Predictive Shift Scheduling & Coverage Models",
+            "De-escalation & Conflict Resolution",
+            "Performance Reviews & Key Metric Accountability"
+          ]
+        },
+        {
+          title: "Visual Merchandising & Sales",
+          icon: "tag",
+          color: "purple",
+          description: "Optimizing store aesthetics and customer journey to maximize spend per square foot.",
+          skills: [
+            "Planogram Integrity & Rapid Floor Conversions",
+            "High-Traffic Focal Displays & Window Sets",
+            "Traffic Heatmap & Footprint Optimization",
+            "Units Per Transaction (UPT) Strategies",
+            "Markdown Cadence & Clearance Velocity",
+            "Seasonal Product Launches & VIP Events"
+          ]
+        },
+        {
+          title: "Customer Loyalty & Omnichannel",
+          icon: "heart-handshake",
+          color: "amber",
+          description: "Bridging physical and digital retail to deliver seamless shopping experiences.",
+          skills: [
+            "BOPIS & Curbside 2-Hour SLA Fulfillment",
+            "Ship-from-Store (SFS) Rapid Pick & Pack",
+            "VIP Clienteling & Personalized Appointments",
+            "Net Promoter Score (NPS) Enhancement",
+            "Omnichannel Returns & Loyalty Enrollment",
+            "Local Community Partnerships & Trunk Shows"
+          ]
+        }
+      ],
+      caseStudies: [
+        {
+          id: 1,
+          title: "Flagship Turnaround: #48 to #3 in the Region",
+          badge: "Turnaround Strategy",
+          subtitle: "Rebuilding store culture, operational cadence, and customer trust in 9 months.",
+          challenge: "Assigned to a 32,000 sq ft flagship store suffering from severe morale collapse, 65% staff turnover, 18% sales deficit against budget, and failing district visual audits.",
+          strategy: [
+            "Conducted comprehensive 1-on-1 discovery interviews with all 40 associates to rebuild trust and address friction points.",
+            "Re-engineered shift schedules to align peak staffing directly with foot-traffic heatmaps rather than static hourly quotas.",
+            "Instituted high-energy 10-minute daily shift huddles recognizing top performers and spotlighting daily high-margin focal items.",
+            "Re-trained sales floor teams in open-ended consultative inquiry, moving away from passive cashiering."
+          ],
+          results: [
+            "+27% revenue growth in 3 quarters, delivering +$680,000 above corporate budget.",
+            "Store jumped from #48 to #3 overall across the 52-store market.",
+            "Voluntary associate turnover plunged by 45%, with zero management resignations."
+          ]
+        },
+        {
+          id: 2,
+          title: "Zero-Tolerance Inventory Shrinkage Reduction",
+          badge: "Asset Protection",
+          subtitle: "Slashing inventory loss from 2.1% to 0.52%, preserving $215K in EBITDA.",
+          challenge: "Tagged by regional leadership as a 'High Risk' location due to chronic stock shortages, unmonitored fitting room doors, and mismanaged receiving docks.",
+          strategy: [
+            "Established a strict dual-custody sign-off protocol for all incoming high-value freight deliveries.",
+            "Reorganized stockroom storage according to 5S lean principles, locking high-theft SKUs in coded security cages.",
+            "Retrained floor staff in 'Engage & Protect' non-confrontational customer service greetings at all fitting room entrances.",
+            "Instituted bi-weekly micro-audits to catch barcode and SKU scan discrepancies before annual book reconciliation."
+          ],
+          results: [
+            "Cut store shrink rate from 2.1% down to 0.52% in 18 months, leading the Midwest division.",
+            "Awarded Corporate 'Store of the Year in Asset Protection' distinction.",
+            "Achieved 99.4% audit reconciliation accuracy during annual physical stock inventory."
+          ]
+        },
+        {
+          id: 3,
+          title: "Peak Holiday Scaling: $4.8M Q4 & 100% Black Friday Attendance",
+          badge: "Peak Scaling & Logistics",
+          subtitle: "Delivering record holiday revenue, zero OSHA incidents, and 99.6% online fulfillment.",
+          challenge: "Managing a 350% surge in customer traffic and 400+ daily online pickups while maintaining pristine floor safety and staff morale during peak holiday stress.",
+          strategy: [
+            "Proactively hired and onboarded 35 seasonal associates 4 weeks prior to peak to ensure thorough POS and floor coaching.",
+            "Constructed a dedicated BOPIS staging hub at the secondary store entrance to prevent checkout queue bottlenecks.",
+            "Deployed mobile handheld POS units for line-busting during weekend rush hours, cutting cashier wait times by 60%.",
+            "Provided catered shift meals, recognition raffles, and enforced structured wellness rest breaks."
+          ],
+          results: [
+            "Delivered $4.8M in Q4 net sales (120% of budget), breaking all previous store holiday records.",
+            "Processed over 12,500 BOPIS orders with 99.6% on-time fulfillment rate.",
+            "Zero OSHA injuries, zero stockroom accidents, and 100% staff attendance on Black Friday and Super Saturday."
+          ]
+        }
+      ],
+      experience: [
+        {
+          role: "Store General Manager (Premier Flagship)",
+          company: "Apex Retail Brands / Luxury & Lifestyle Goods",
+          location: "Chicago, IL",
+          period: "2021 – Present",
+          metrics: "45 Team Members | $14.5M Annual Volume | 32,000 sq. ft.",
+          description: "Full P&L and operational accountability for the brand's premier Midwest flagship store. Drive customer acquisition, omnichannel logistics, workforce management, and brand visual excellence.",
+          highlights: [
+            "Achieved #1 store in district sales volume for 2023 and 2024, beating plan by an average of 14% each year.",
+            "Controlled total payroll spend to 8.9% of net sales (budgeted at 9.5%), saving $87,000 annually while maintaining high floor coverage.",
+            "Fostered an 88% associate retention rate, coaching and promoting 6 associates into Department Supervisors and Assistant Store Managers.",
+            "Honored as 'General Manager of the Year' for Region 4 in 2023."
+          ]
+        },
+        {
+          role: "Assistant Store Manager — Operations & Merchandising",
+          company: "Vanguard Fashion & Apparel Co.",
+          location: "Schaumburg, IL",
+          period: "2018 – 2021",
+          metrics: "28 Team Members | $9.2M Annual Volume",
+          description: "Managed day-to-day store operations, stockroom intake, floor replenishment, and visual merchandising. Served as acting General Manager during district leadership transitions.",
+          highlights: [
+            "Spearheaded complete visual floor remodel, increasing front focal department sales by 31% YoY.",
+            "Streamlined shipment intake process, reducing pallet unload-to-rack transit time from 4.5 hours down to 2.1 hours.",
+            "Co-authored the district-wide seasonal onboarding handbook adopted across 18 stores.",
+            "Supervised quarterly cycle counts with less than 0.7% variance across 85,000 active SKUs."
+          ]
+        },
+        {
+          role: "Department Manager / Lead Shift Supervisor",
+          company: "Metro Lifestyle Retail Group",
+          location: "Naperville, IL",
+          period: "2015 – 2018",
+          metrics: "14 Associates | $4.1M Department Volume",
+          description: "Directed daily floor sales, customer escalations, merchandising maintenance, and register reconciliations for the store's highest-grossing department.",
+          highlights: [
+            "Exceeded department quarterly sales targets for 10 consecutive quarters.",
+            "Awarded 'Best Customer Service Supervisor' across the Midwest district twice.",
+            "Trained 50+ newly hired cashiers and sales associates on POS operations and LP awareness."
+          ]
+        }
+      ],
+      systems: [
+        { name: "POS & ERP Systems", items: ["SAP Retail", "Oracle Retail (ORPOS)", "Shopify POS Plus", "Square for Retail", "NetSuite ERP", "Lightspeed"] },
+        { name: "Workforce & Scheduling", items: ["UKG / Kronos", "Workday", "Deputy", "Legion WFM", "ADP Workforce Now"] },
+        { name: "Analytics & Traffic", items: ["Microsoft Power BI", "Advanced Excel (Pivots/Forecasts)", "Tableau", "RetailNext Foot Traffic Scanners"] },
+        { name: "Logistics & Omnichannel", items: ["Zebra RFID Handhelds", "Manhattan WMS", "BOPIS Portals", "Ship-from-Store (SFS)"] }
+      ],
+      education: [
+        { title: "Certified Retail Management Professional (CRMP)", org: "National Retail Federation (NRF)", year: "2022" },
+        { title: "Bachelor of Science in Business Administration & Management", org: "Illinois State University", year: "2015" },
+        { title: "Advanced Loss Prevention & Asset Protection Certification", org: "Retail Asset Protection Institute", year: "2020" },
+        { title: "OSHA 10-Hour General Industry Safety Certification", org: "OSHA Safety Institute", year: "2021" }
+      ],
+      endorsements: [
+        {
+          quote: "Alex is the most dependable, results-oriented General Manager in our 50-store region. When we have a challenging store that needs high energy, financial discipline, and a cultural turnaround, Alex is our first phone call.",
+          author: "David Sterling",
+          role: "Regional Vice President",
+          company: "Apex Retail Brands"
+        },
+        {
+          quote: "Working under Alex completely changed my retail career. Alex doesn't just manage; he coaches every single day. Under his mentorship, I learned how to read a P&L and was promoted to my own store manager role within 18 months.",
+          author: "Elena Rostova",
+          role: "Store Manager (Former Assistant GM under Alex)",
+          company: "Vanguard Fashion Co."
+        },
+        {
+          quote: "In my 15 years in Retail Loss Prevention, I've rarely seen a store manager run such an airtight inventory system. Alex treats store assets like his own money, and his audit scores speak for themselves.",
+          author: "Marcus Brody",
+          role: "District Asset Protection Director",
+          company: "Apex Retail Brands"
+        }
+      ]
+    };
+
+    function App() {
+      const [darkMode, setDarkMode] = useState(false);
+      const [activeKpi, setActiveKpi] = useState("revenue");
+      const [selectedCaseStudy, setSelectedCaseStudy] = useState(null);
+      const [showResumeModal, setShowResumeModal] = useState(false);
+      const [showCustomizeGuide, setShowCustomizeGuide] = useState(false);
+      const [contactSent, setContactSent] = useState(false);
+      const [contactForm, setContactForm] = useState({ name: "", email: "", subject: "", message: "" });
+
+      // Sync dark mode class
+      useEffect(() => {
+        if (darkMode) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      }, [darkMode]);
+
+      // Initialize Lucide icons on render / change
+      useEffect(() => {
+        if (window.lucide) {
+          window.lucide.createIcons();
+        }
+      });
+
+      const handleContactSubmit = (e) => {
+        e.preventDefault();
+        setContactSent(true);
+        setTimeout(() => setContactSent(false), 5000);
+        setContactForm({ name: "", email: "", subject: "", message: "" });
+      };
+
+      const currentKpiData = portfolioData.kpis.find(k => k.id === activeKpi) || portfolioData.kpis[0];
+
+      return (
+        <div className="min-h-screen flex flex-col">
+          {/* Top Sticky Navigation */}
+          <nav className="sticky top-0 z-40 backdrop-blur-md bg-white/85 dark:bg-navy-900/85 border-b border-slate-200 dark:border-slate-800 transition-colors">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex items-center justify-between h-16">
+                {/* Logo / Brand */}
+                <a href="#hero" className="flex items-center gap-3 group">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-white font-bold text-lg shadow-sm group-hover:scale-105 transition-transform">
+                    AM
+                  </div>
+                  <div>
+                    <div className="font-bold text-slate-900 dark:text-white leading-tight flex items-center gap-2">
+                      {portfolioData.personal.name}
+                      <span className="hidden sm:inline-block px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 rounded-full">
+                        Store GM
+                      </span>
+                    </div>
+                    <div className="text-xs text-slate-500 dark:text-slate-400">Retail Leadership & P&L</div>
+                  </div>
+                </a>
+
+                {/* Desktop Nav Links */}
+                <div className="hidden md:flex items-center space-x-6 text-sm font-medium">
+                  <a href="#overview" className="text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Overview</a>
+                  <a href="#kpis" className="text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">KPI Dashboard</a>
+                  <a href="#competencies" className="text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Competencies</a>
+                  <a href="#case-studies" className="text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Turnaround Case Studies</a>
+                  <a href="#experience" className="text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Experience</a>
+                  <a href="#contact" className="text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Contact</a>
+                </div>
+
+                {/* Right Action Buttons */}
+                <div className="flex items-center gap-2 sm:gap-3">
+                  {/* Theme Toggle */}
+                  <button 
+                    onClick={() => setDarkMode(!darkMode)}
+                    title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+                    className="p-2 rounded-lg text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+                  >
+                    {darkMode ? (
+                      <i data-lucide="sun" className="w-5 h-5 text-amber-400"></i>
+                    ) : (
+                      <i data-lucide="moon" className="w-5 h-5 text-slate-600"></i>
+                    )}
+                  </button>
+
+                  {/* Resume Modal Trigger */}
+                  <button 
+                    onClick={() => setShowResumeModal(true)}
+                    className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 transition"
+                  >
+                    <i data-lucide="file-text" className="w-4 h-4 text-emerald-500"></i>
+                    View Resume
+                  </button>
+
+                  {/* Connect CTA */}
+                  <a 
+                    href="#contact"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm transition"
+                  >
+                    <span>Contact Me</span>
+                    <i data-lucide="arrow-right" className="w-3.5 h-3.5"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </nav>
+
+          {/* Hero Section */}
+          <section id="hero" className="relative pt-12 pb-16 md:pt-20 md:pb-24 overflow-hidden border-b border-slate-200 dark:border-slate-800/80 bg-gradient-to-b from-white via-slate-50 to-slate-100/50 dark:from-navy-900 dark:via-navy-950 dark:to-navy-900">
+            {/* Subtle background glow */}
+            <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-emerald-500/10 dark:bg-emerald-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+              <div className="grid lg:grid-cols-12 gap-12 items-center">
+                
+                {/* Left Column: Headline and Bio */}
+                <div className="lg:col-span-7 space-y-6">
+                  {/* Status Pill */}
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800/60 text-xs font-medium text-emerald-800 dark:text-emerald-300">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    {portfolioData.personal.availability}
+                  </div>
+
+                  <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.15]">
+                    Maximizing <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-teal-500 to-emerald-400">Retail Sales</span> & Store Operations.
+                  </h1>
+
+                  <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl leading-relaxed">
+                    {portfolioData.personal.subheadline}
+                  </p>
+
+                  {/* Location & Quick Meta */}
+                  <div className="flex flex-wrap gap-4 text-xs font-medium text-slate-500 dark:text-slate-400 pt-2">
+                    <div className="flex items-center gap-1.5">
+                      <i data-lucide="map-pin" className="w-4 h-4 text-emerald-500"></i>
+                      <span>{portfolioData.personal.location}</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <i data-lucide="building-2" className="w-4 h-4 text-emerald-500"></i>
+                      <span>{portfolioData.personal.annualRevenueManaged} Annual P&L</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <i data-lucide="users" className="w-4 h-4 text-emerald-500"></i>
+                      <span>{portfolioData.personal.teamSizeLed}</span>
+                    </div>
+                  </div>
+
+                  {/* CTAs */}
+                  <div className="flex flex-wrap items-center gap-3 pt-2">
+                    <a 
+                      href="#kpis" 
+                      className="px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm shadow-md shadow-emerald-600/20 flex items-center gap-2 transition"
+                    >
+                      <i data-lucide="bar-chart-3" className="w-4 h-4"></i>
+                      View KPI Achievements
+                    </a>
+                    <button 
+                      onClick={() => setShowResumeModal(true)}
+                      className="px-5 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 font-semibold text-sm text-slate-700 dark:text-slate-200 shadow-sm flex items-center gap-2 transition"
+                    >
+                      <i data-lucide="download" className="w-4 h-4 text-emerald-500"></i>
+                      Print / Download Resume
+                    </button>
+                    <a 
+                      href="#contact" 
+                      className="px-4 py-3 rounded-xl hover:bg-slate-200/60 dark:hover:bg-slate-800/80 font-medium text-sm text-slate-600 dark:text-slate-300 transition"
+                    >
+                      Schedule Discussion &rarr;
+                    </a>
+                  </div>
+                </div>
+
+                {/* Right Column: Hero Profile Card & Live Snapshot */}
+                <div className="lg:col-span-5">
+                  <div className="relative rounded-2xl bg-white dark:bg-navy-900 border border-slate-200 dark:border-slate-800 p-6 shadow-xl space-y-6">
+                    <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-full bg-emerald-100 dark:bg-emerald-950/80 border-2 border-emerald-500 flex items-center justify-center font-bold text-emerald-700 dark:text-emerald-300 text-xl">
+                          AM
+                        </div>
+                        <div>
+                          <h3 className="font-bold text-slate-900 dark:text-white leading-tight">Alex Morgan</h3>
+                          <p className="text-xs text-slate-500 dark:text-slate-400">Retail General Manager</p>
+                        </div>
+                      </div>
+                      <span className="px-2.5 py-1 text-xs font-semibold rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-900/60 dark:text-emerald-300">
+                        Top 2% Ranked
+                      </span>
+                    </div>
+
+                    {/* Quick Metric Pills */}
+                    <div className="grid grid-cols-2 gap-3">
+                      <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800">
+                        <div className="text-xs text-slate-500 dark:text-slate-400">Sales Quota Avg</div>
+                        <div className="text-xl font-bold text-slate-900 dark:text-white mt-1">114%</div>
+                        <div className="text-[11px] text-emerald-600 dark:text-emerald-400 font-medium flex items-center gap-1 mt-0.5">
+                          <i data-lucide="trending-up" className="w-3 h-3"></i> +14% Over Plan
+                        </div>
+                      </div>
+
+                      <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800">
+                        <div className="text-xs text-slate-500 dark:text-slate-400">Inventory Shrink</div>
+                        <div className="text-xl font-bold text-emerald-600 dark:text-emerald-400 mt-1">0.52%</div>
+                        <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium mt-0.5">
+                          Industry Avg: 1.8%
+                        </div>
+                      </div>
+
+                      <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800">
+                        <div className="text-xs text-slate-500 dark:text-slate-400">Team Retention</div>
+                        <div className="text-xl font-bold text-slate-900 dark:text-white mt-1">88%</div>
+                        <div className="text-[11px] text-emerald-600 dark:text-emerald-400 font-medium mt-0.5">
+                          -40% Turnover
+                        </div>
+                      </div>
+
+                      <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800">
+                        <div className="text-xs text-slate-500 dark:text-slate-400">Customer NPS</div>
+                        <div className="text-xl font-bold text-slate-900 dark:text-white mt-1">92 / 100</div>
+                        <div className="text-[11px] text-emerald-600 dark:text-emerald-400 font-medium mt-0.5">
+                          Top Tier Experience
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Operational Highlights quote */}
+                    <div className="p-3.5 rounded-xl bg-emerald-50/70 dark:bg-emerald-950/40 border border-emerald-100 dark:border-emerald-900/60 text-xs text-emerald-900 dark:text-emerald-200 italic leading-relaxed">
+                      "Excellence on the retail floor comes from clear daily metrics, authentic associate mentorship, and obsessive attention to customer flow and visual merchandising."
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              {/* Bottom Hero Stats Strip */}
+              <div className="mt-12 pt-8 border-t border-slate-200/80 dark:border-slate-800 grid grid-cols-2 md:grid-cols-4 gap-6">
+                {portfolioData.heroStats.map((stat, idx) => (
+                  <div key={idx} className="space-y-1">
+                    <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
+                      {stat.value}
+                    </div>
+                    <div className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                      {stat.label}
+                    </div>
+                    <div className="text-[11px] text-emerald-600 dark:text-emerald-400 font-medium">
+                      {stat.change} &bull; <span className="text-slate-500 dark:text-slate-400">{stat.sub}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+            </div>
+          </section>
+
+          {/* Executive Overview */}
+          <section id="overview" className="py-16 bg-white dark:bg-navy-900 border-b border-slate-200 dark:border-slate-800">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="max-w-3xl mx-auto text-center space-y-4">
+                <span className="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
+                  Executive Profile & Philosophy
+                </span>
+                <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
+                  Bridging Financial Precision with High-Touch Retail Execution
+                </h2>
+                <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
+                  {portfolioData.executiveSummary}
+                </p>
+              </div>
+
+              <div className="mt-12 grid sm:grid-cols-3 gap-6">
+                <div className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 space-y-3">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold">
+                    <i data-lucide="trending-up" className="w-5 h-5"></i>
+                  </div>
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white">P&L Accountability</h3>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                    Proven discipline over multi-million dollar annual store budgets, payroll-to-sales percentages, gross margins, and markdown cycles.
+                  </p>
+                </div>
+
+                <div className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 space-y-3">
+                  <div className="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-950 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold">
+                    <i data-lucide="shield-check" className="w-5 h-5"></i>
+                  </div>
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white">Asset & Loss Protection</h3>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                    Maintained a benchmark 0.52% shrink rate through rigorous cycle counts, 5S stockroom organization, and audit-ready compliance.
+                  </p>
+                </div>
+
+                <div className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 space-y-3">
+                  <div className="w-10 h-10 rounded-xl bg-purple-100 dark:bg-purple-950 text-purple-600 dark:text-purple-400 flex items-center justify-center font-bold">
+                    <i data-lucide="users" className="w-5 h-5"></i>
+                  </div>
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white">Leadership & Culture</h3>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                    Created an empowering store environment that cut turnover by 40% and served as a talent incubator, promoting 6 associates into management.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Interactive KPI Dashboard Section */}
+          <section id="kpis" className="py-16 md:py-24 bg-slate-50 dark:bg-navy-950 border-b border-slate-200 dark:border-slate-800">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex flex-col md:flex-row md:items-end justify-between mb-10">
+                <div className="space-y-2 max-w-xl">
+                  <span className="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
+                    Proven Results & Metrics
+                  </span>
+                  <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white">
+                    Store Manager KPI Performance Dashboard
+                  </h2>
+                  <p className="text-sm text-slate-600 dark:text-slate-400">
+                    Select a key operational pillar to explore historical data, targeted vs actual performance, and specific execution strategies.
+                  </p>
+                </div>
+
+                {/* KPI Pill Switcher */}
+                <div className="mt-6 md:mt-0 flex flex-wrap gap-2 p-1.5 rounded-xl bg-slate-200/80 dark:bg-slate-800/80 border border-slate-300 dark:border-slate-700">
+                  {portfolioData.kpis.map((kpi) => (
+                    <button
+                      key={kpi.id}
+                      onClick={() => setActiveKpi(kpi.id)}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
+                        activeKpi === kpi.id
+                          ? "bg-emerald-600 text-white shadow-sm"
+                          : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"
+                      }`}
+                    >
+                      {kpi.title.split("&")[0].trim()}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Main KPI Detail Card */}
+              <div className="rounded-2xl bg-white dark:bg-navy-900 border border-slate-200 dark:border-slate-800 p-6 md:p-8 shadow-sm">
+                <div className="grid lg:grid-cols-12 gap-8 items-start">
+                  
+                  {/* Left Column: Metric & Strategic Highlights */}
+                  <div className="lg:col-span-6 space-y-6">
+                    <div>
+                      <span className="text-xs font-semibold px-2.5 py-1 rounded-md bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
+                        {currentKpiData.category}
+                      </span>
+                      <h3 className="text-2xl font-bold text-slate-900 dark:text-white mt-3">
+                        {currentKpiData.title}
+                      </h3>
+                      <div className="text-xl font-extrabold text-emerald-600 dark:text-emerald-400 mt-1">
+                        {currentKpiData.metric}
+                      </div>
+                      <p className="text-sm text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
+                        {currentKpiData.summary}
+                      </p>
+                    </div>
+
+                    <div className="space-y-3 pt-2">
+                      <div className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                        Key Operational Strategies Executed:
+                      </div>
+                      {currentKpiData.points.map((pt, i) => (
+                        <div key={i} className="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300">
+                          <div className="w-5 h-5 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+                            <i data-lucide="check" className="w-3.5 h-3.5"></i>
+                          </div>
+                          <span>{pt}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Right Column: Comparative Visual Bars */}
+                  <div className="lg:col-span-6 bg-slate-50 dark:bg-slate-800/40 rounded-xl p-6 border border-slate-100 dark:border-slate-800 space-y-5">
+                    <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-3">
+                      <div className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                        Quarterly / Comparative Tracking
+                      </div>
+                      <span className="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">
+                        Actual Exceeded Plan
+                      </span>
+                    </div>
+
+                    <div className="space-y-4">
+                      {currentKpiData.barData.map((item, index) => (
+                        <div key={index} className="space-y-1.5">
+                          <div className="flex justify-between text-xs font-medium">
+                            <span className="text-slate-800 dark:text-slate-200">{item.label}</span>
+                            <span className="font-bold text-emerald-600 dark:text-emerald-400">
+                              {item.note ? item.note : `${item.actual}% (Target: ${item.target}%)`}
+                            </span>
+                          </div>
+
+                          {/* Dual Progress Bar (Plan vs Actual) */}
+                          <div className="w-full bg-slate-200 dark:bg-slate-700 h-3 rounded-full overflow-hidden relative">
+                            {/* Target Marker */}
+                            <div 
+                              className="absolute top-0 bottom-0 w-0.5 bg-slate-400 dark:bg-slate-300 z-10" 
+                              style={{ left: `${Math.min(item.target, 100)}%` }}
+                              title={`Target: ${item.target}%`}
+                            ></div>
+                            
+                            {/* Actual Fill */}
+                            <div 
+                              className="bg-gradient-to-r from-emerald-500 to-teal-400 h-full rounded-full transition-all duration-500"
+                              style={{ width: `${Math.min(item.actual, 100)}%` }}
+                            ></div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="pt-2 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
+                      <div className="flex items-center gap-1.5">
+                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span>
+                        <span>Delivered Performance</span>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <span className="w-1 h-3 bg-slate-400 inline-block"></span>
+                        <span>Corporate Budget Target</span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+          {/* Core Competencies Matrix */}
+          <section id="competencies" className="py-16 md:py-24 bg-white dark:bg-navy-900 border-b border-slate-200 dark:border-slate-800">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
+                <span className="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
+                  Leadership Expertise
+                </span>
+                <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white">
+                  Four Pillars of Store General Management
+                </h2>
+                <p className="text-sm text-slate-600 dark:text-slate-300">
+                  Comprehensive mastery across the critical functional areas required to run an efficient, high-volume retail destination.
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {portfolioData.competencyCategories.map((cat, idx) => (
+                  <div 
+                    key={idx} 
+                    className="group rounded-2xl bg-slate-50 dark:bg-slate-850 p-6 border border-slate-200 dark:border-slate-800 hover:border-emerald-500/50 hover:shadow-lg transition flex flex-col justify-between"
+                  >
+                    <div>
+                      <div className="w-12 h-12 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-emerald-600 dark:text-emerald-400 shadow-sm mb-4 group-hover:scale-105 transition-transform">
+                        <i data-lucide={cat.icon} className="w-6 h-6"></i>
+                      </div>
+                      <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">
+                        {cat.title}
+                      </h3>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mb-4 leading-relaxed">
+                        {cat.description}
+                      </p>
+
+                      <ul className="space-y-2 border-t border-slate-200/80 dark:border-slate-800 pt-4">
+                        {cat.skills.map((skill, sIdx) => (
+                          <li key={sIdx} className="text-xs text-slate-700 dark:text-slate-300 flex items-start gap-2">
+                            <span className="text-emerald-500 font-bold shrink-0">&bull;</span>
+                            <span>{skill}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Interactive Turnaround Case Studies */}
+          <section id="case-studies" className="py-16 md:py-24 bg-slate-50 dark:bg-navy-950 border-b border-slate-200 dark:border-slate-800">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div className="space-y-2 max-w-xl">
+                  <span className="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
+                    Operational Deep Dives
+                  </span>
+                  <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white">
+                    Store Turnaround & Impact Case Studies
+                  </h2>
+                  <p className="text-sm text-slate-600 dark:text-slate-400">
+                    Real-world challenges solved through disciplined retail leadership, process optimization, and team empowerment.
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-3 gap-8">
+                {portfolioData.caseStudies.map((study) => (
+                  <div 
+                    key={study.id} 
+                    className="rounded-2xl bg-white dark:bg-navy-900 border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between"
+                  >
+                    <div className="p-6 space-y-4">
+                      <div className="flex items-center justify-between">
+                        <span className="px-2.5 py-1 text-[11px] font-bold rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
+                          {study.badge}
+                        </span>
+                        <span className="text-xs text-slate-400 font-medium">Case Study #{study.id}</span>
+                      </div>
+
+                      <h3 className="text-lg font-bold text-slate-900 dark:text-white leading-snug">
+                        {study.title}
+                      </h3>
+
+                      <p className="text-xs text-slate-500 dark:text-slate-400 italic">
+                        {study.subtitle}
+                      </p>
+
+                      <div className="space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+                        <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                          The Challenge
+                        </div>
+                        <p className="text-xs text-slate-600 dark:text-slate-300 line-clamp-3 leading-relaxed">
+                          {study.challenge}
+                        </p>
+                      </div>
+
+                      <div className="space-y-2">
+                        <div className="text-[11px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
+                          Measurable Outcome
+                        </div>
+                        <div className="text-xs font-semibold text-slate-800 dark:text-slate-200 bg-emerald-50 dark:bg-emerald-950/40 p-2.5 rounded-lg border border-emerald-100 dark:border-emerald-900/40">
+                          {study.results[0]}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="p-4 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-100 dark:border-slate-800">
+                      <button 
+                        onClick={() => setSelectedCaseStudy(study)}
+                        className="w-full py-2 px-3 text-xs font-semibold rounded-lg bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 hover:bg-emerald-50 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 flex items-center justify-center gap-1.5 transition"
+                      >
+                        <span>View Strategy & Execution</span>
+                        <i data-lucide="arrow-right" className="w-3.5 h-3.5 text-emerald-500"></i>
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Career Experience Timeline */}
+          <section id="experience" className="py-16 md:py-24 bg-white dark:bg-navy-900 border-b border-slate-200 dark:border-slate-800">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="max-w-2xl mx-auto text-center mb-14 space-y-3">
+                <span className="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
+                  Career Trajectory
+                </span>
+                <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white">
+                  Professional Store Leadership Experience
+                </h2>
+                <p className="text-sm text-slate-600 dark:text-slate-300">
+                  A steady progression from hands-on shift supervision to steering flagship retail destinations.
+                </p>
+              </div>
+
+              <div className="max-w-4xl mx-auto space-y-8">
+                {portfolioData.experience.map((exp, idx) => (
+                  <div 
+                    key={idx} 
+                    className="relative pl-8 sm:pl-10 border-l-2 border-emerald-500/30 dark:border-emerald-500/20 group"
+                  >
+                    {/* Circle on timeline */}
+                    <div className="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-white dark:bg-navy-900 border-2 border-emerald-500 group-hover:scale-125 transition-transform"></div>
+
+                    <div className="rounded-2xl bg-slate-50 dark:bg-slate-850 p-6 sm:p-7 border border-slate-200 dark:border-slate-800 space-y-4">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200/80 dark:border-slate-800 pb-4">
+                        <div>
+                          <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+                            {exp.role}
+                          </h3>
+                          <div className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">
+                            {exp.company} &bull; <span className="text-slate-500 dark:text-slate-400 font-normal">{exp.location}</span>
+                          </div>
+                        </div>
+                        <div className="text-xs font-semibold px-3 py-1 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 shrink-0 self-start sm:self-auto">
+                          {exp.period}
+                        </div>
+                      </div>
+
+                      <div className="text-xs font-medium text-slate-500 dark:text-slate-400 flex items-center gap-2">
+                        <i data-lucide="layers" className="w-3.5 h-3.5 text-emerald-500"></i>
+                        <span>Scope: {exp.metrics}</span>
+                      </div>
+
+                      <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                        {exp.description}
+                      </p>
+
+                      <div className="space-y-2 pt-2">
+                        <div className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                          Key Achievements & Milestones:
+                        </div>
+                        <ul className="space-y-1.5">
+                          {exp.highlights.map((item, hIdx) => (
+                            <li key={hIdx} className="text-xs text-slate-700 dark:text-slate-300 flex items-start gap-2.5">
+                              <i data-lucide="check-circle-2" className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Systems, Tools, & Certifications */}
+          <section className="py-16 md:py-20 bg-slate-50 dark:bg-navy-950 border-b border-slate-200 dark:border-slate-800">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="grid lg:grid-cols-12 gap-12">
+                
+                {/* Systems & Technology */}
+                <div className="lg:col-span-7 space-y-6">
+                  <div className="space-y-2">
+                    <span className="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
+                      Technical Toolkit
+                    </span>
+                    <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+                      Retail Systems, POS & Analytics Tools
+                    </h2>
+                    <p className="text-xs text-slate-600 dark:text-slate-400">
+                      Proficient in enterprise retail platforms and modern omnichannel store tech stacks.
+                    </p>
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    {portfolioData.systems.map((sys, sIdx) => (
+                      <div key={sIdx} className="p-4 rounded-xl bg-white dark:bg-navy-900 border border-slate-200 dark:border-slate-800 space-y-2">
+                        <h3 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-1.5">
+                          <i data-lucide="cpu" className="w-3.5 h-3.5 text-emerald-500"></i>
+                          {sys.name}
+                        </h3>
+                        <div className="flex flex-wrap gap-1.5">
+                          {sys.items.map((it, iIdx) => (
+                            <span key={iIdx} className="px-2 py-1 text-[11px] font-medium rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                              {it}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Education & Certifications */}
+                <div className="lg:col-span-5 space-y-6">
+                  <div className="space-y-2">
+                    <span className="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
+                      Credentials
+                    </span>
+                    <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+                      Education & Certifications
+                    </h2>
+                    <p className="text-xs text-slate-600 dark:text-slate-400">
+                      Accredited certifications in retail management, loss prevention, and industry safety.
+                    </p>
+                  </div>
+
+                  <div className="space-y-3">
+                    {portfolioData.education.map((edu, eIdx) => (
+                      <div key={eIdx} className="p-4 rounded-xl bg-white dark:bg-navy-900 border border-slate-200 dark:border-slate-800 flex items-start gap-3">
+                        <div className="w-8 h-8 rounded-lg bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+                          <i data-lucide="award" className="w-4 h-4"></i>
+                        </div>
+                        <div>
+                          <h4 className="text-xs font-bold text-slate-900 dark:text-white leading-snug">
+                            {edu.title}
+                          </h4>
+                          <div className="text-[11px] text-slate-500 dark:text-slate-400">
+                            {edu.org} &bull; <span className="text-emerald-600 dark:text-emerald-400 font-semibold">{edu.year}</span>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </section>
+
+          {/* Leadership Endorsements */}
+          <section className="py-16 md:py-24 bg-white dark:bg-navy-900 border-b border-slate-200 dark:border-slate-800">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="max-w-2xl mx-auto text-center mb-12 space-y-3">
+                <span className="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
+                  Leadership Endorsements
+                </span>
+                <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white">
+                  What Retail Executives & Team Members Say
+                </h2>
+              </div>
+
+              <div className="grid md:grid-cols-3 gap-6">
+                {portfolioData.endorsements.map((item, idx) => (
+                  <div 
+                    key={idx} 
+                    className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-850 border border-slate-200 dark:border-slate-800 flex flex-col justify-between space-y-6"
+                  >
+                    <div className="space-y-3">
+                      <div className="text-emerald-500">
+                        <i data-lucide="quote" className="w-7 h-7"></i>
+                      </div>
+                      <p className="text-xs text-slate-700 dark:text-slate-300 italic leading-relaxed">
+                        "{item.quote}"
+                      </p>
+                    </div>
+
+                    <div className="border-t border-slate-200/80 dark:border-slate-800 pt-4">
+                      <div className="font-bold text-xs text-slate-900 dark:text-white">{item.author}</div>
+                      <div className="text-[11px] text-emerald-600 dark:text-emerald-400 font-medium">{item.role}</div>
+                      <div className="text-[10px] text-slate-400">{item.company}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Contact & Discussion Section */}
+          <section id="contact" className="py-16 md:py-24 bg-slate-50 dark:bg-navy-950">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="grid lg:grid-cols-12 gap-12 items-start">
+                
+                {/* Contact Information & Availability */}
+                <div className="lg:col-span-5 space-y-6">
+                  <div>
+                    <span className="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
+                      Get In Touch
+                    </span>
+                    <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white mt-2">
+                      Let's Discuss Retail Leadership Opportunities
+                    </h2>
+                    <p className="text-sm text-slate-600 dark:text-slate-300 mt-3 leading-relaxed">
+                      Whether you need a proven Store General Manager for a flagship turnaround, multi-unit market expansion, or district leadership, I am ready to bring measurable results.
+                    </p>
+                  </div>
+
+                  <div className="space-y-4 pt-2">
+                    <div className="flex items-center gap-3 text-sm text-slate-700 dark:text-slate-300">
+                      <div className="w-10 h-10 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-emerald-600 shrink-0 shadow-sm">
+                        <i data-lucide="mail" className="w-5 h-5"></i>
+                      </div>
+                      <div>
+                        <div className="text-xs text-slate-400">Direct Email</div>
+                        <a href={`mailto:${portfolioData.personal.email}`} className="font-semibold text-slate-900 dark:text-white hover:text-emerald-500 transition">
+                          {portfolioData.personal.email}
+                        </a>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-3 text-sm text-slate-700 dark:text-slate-300">
+                      <div className="w-10 h-10 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-emerald-600 shrink-0 shadow-sm">
+                        <i data-lucide="phone" className="w-5 h-5"></i>
+                      </div>
+                      <div>
+                        <div className="text-xs text-slate-400">Direct Phone</div>
+                        <a href={`tel:${portfolioData.personal.phone}`} className="font-semibold text-slate-900 dark:text-white hover:text-emerald-500 transition">
+                          {portfolioData.personal.phone}
+                        </a>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-3 text-sm text-slate-700 dark:text-slate-300">
+                      <div className="w-10 h-10 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-emerald-600 shrink-0 shadow-sm">
+                        <i data-lucide="map-pin" className="w-5 h-5"></i>
+                      </div>
+                      <div>
+                        <div className="text-xs text-slate-400">Location & Mobility</div>
+                        <span className="font-semibold text-slate-900 dark:text-white">
+                          {portfolioData.personal.location}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-3 text-sm text-slate-700 dark:text-slate-300">
+                      <div className="w-10 h-10 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-emerald-600 shrink-0 shadow-sm">
+                        <i data-lucide="linkedin" className="w-5 h-5"></i>
+                      </div>
+                      <div>
+                        <div className="text-xs text-slate-400">LinkedIn Profile</div>
+                        <a href={portfolioData.personal.linkedin} target="_blank" rel="noopener noreferrer" className="font-semibold text-emerald-600 dark:text-emerald-400 hover:underline">
+                          linkedin.com/in/alexmorgan-retail
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Direct Contact Form */}
+                <div className="lg:col-span-7">
+                  <div className="rounded-2xl bg-white dark:bg-navy-900 border border-slate-200 dark:border-slate-800 p-6 sm:p-8 shadow-sm">
+                    <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">
+                      Send a Direct Message
+                    </h3>
+
+                    {contactSent && (
+                      <div className="mb-4 p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-200 dark:border-emerald-800 text-xs text-emerald-800 dark:text-emerald-200 flex items-center gap-2">
+                        <i data-lucide="check-circle" className="w-4 h-4 text-emerald-500"></i>
+                        Thank you! Your message has been sent. I will respond within 24 business hours.
+                      </div>
+                    )}
+
+                    <form onSubmit={handleContactSubmit} className="space-y-4">
+                      <div className="grid sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">Your Name</label>
+                          <input 
+                            type="text" 
+                            required
+                            placeholder="e.g. Sarah Jenkins"
+                            value={contactForm.name}
+                            onChange={(e) => setContactForm({...contactForm, name: e.target.value})}
+                            className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">Email Address</label>
+                          <input 
+                            type="email" 
+                            required
+                            placeholder="s.jenkins@retailbrand.com"
+                            value={contactForm.email}
+                            onChange={(e) => setContactForm({...contactForm, email: e.target.value})}
+                            className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">Subject / Opportunity</label>
+                        <input 
+                          type="text" 
+                          required
+                          placeholder="e.g. Flagship Store GM Opening / District Leadership"
+                          value={contactForm.subject}
+                          onChange={(e) => setContactForm({...contactForm, subject: e.target.value})}
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">Message / Details</label>
+                        <textarea 
+                          rows="4" 
+                          required
+                          placeholder="Tell me about your store volume, location, or upcoming leadership requirements..."
+                          value={contactForm.message}
+                          onChange={(e) => setContactForm({...contactForm, message: e.target.value})}
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none"
+                        ></textarea>
+                      </div>
+
+                      <button 
+                        type="submit"
+                        className="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md transition flex items-center justify-center gap-2"
+                      >
+                        <i data-lucide="send" className="w-4 h-4"></i>
+                        Send Message
+                      </button>
+                    </form>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </section>
+
+          {/* Footer */}
+          <footer className="bg-white dark:bg-navy-950 border-t border-slate-200 dark:border-slate-800 py-8 text-xs text-slate-500 dark:text-slate-400">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-slate-800 dark:text-white">{portfolioData.personal.name}</span>
+                <span>&bull; Retail Store General Manager Portfolio</span>
+              </div>
+              <div className="flex items-center gap-4">
+                <button 
+                  onClick={() => setShowCustomizeGuide(!showCustomizeGuide)} 
+                  className="hover:text-emerald-500 underline transition"
+                >
+                  {showCustomizeGuide ? "Hide Edit Guide" : "How to Customize My Details"}
+                </button>
+                <span>&bull;</span>
+                <a href="#hero" className="hover:text-emerald-500 transition">Back to Top &uarr;</a>
+              </div>
+            </div>
+
+            {/* Customization Quick Guide */}
+            {showCustomizeGuide && (
+              <div className="max-w-3xl mx-auto mt-6 p-4 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs text-slate-700 dark:text-slate-300 space-y-2">
+                <div className="font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+                  <i data-lucide="info" className="w-4 h-4 text-emerald-500"></i>
+                  How to customize this portfolio with your own store experience:
+                </div>
+                <p>
+                  1. To edit your name, store volumes, contact email, and history, simply open 
+                  <code className="px-1.5 py-0.5 mx-1 bg-white dark:bg-slate-900 rounded font-mono text-[11px]">src/data/portfolioData.js</code> 
+                  or the top data object in <code className="px-1.5 py-0.5 mx-1 bg-white dark:bg-slate-900 rounded font-mono text-[11px]">index.html</code>.
+                </p>
+                <p>
+                  2. Update the numbers in the <code className="font-mono">heroStats</code> array ($14.5M, 114%, 0.52%) to reflect your specific store achievements.
+                </p>
+                <p>
+                  3. You can click <strong>"View Resume"</strong> at any time to print or save a clean, formatted 1-page PDF version for job applications!
+                </p>
+              </div>
+            )}
+          </footer>
+
+          {/* Case Study Detail Modal */}
+          {selectedCaseStudy && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
+              <div className="bg-white dark:bg-navy-900 rounded-2xl max-w-2xl w-full p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto custom-scrollbar">
+                <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
+                  <span className="px-2.5 py-1 text-xs font-bold rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
+                    {selectedCaseStudy.badge}
+                  </span>
+                  <button 
+                    onClick={() => setSelectedCaseStudy(null)}
+                    className="p-1 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+                  >
+                    <i data-lucide="x" className="w-5 h-5"></i>
+                  </button>
+                </div>
+
+                <div>
+                  <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
+                    {selectedCaseStudy.title}
+                  </h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 italic">
+                    {selectedCaseStudy.subtitle}
+                  </p>
+                </div>
+
+                <div className="space-y-2">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">The Problem & Situation</h4>
+                  <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed bg-slate-50 dark:bg-slate-800/60 p-3.5 rounded-xl border border-slate-200 dark:border-slate-800">
+                    {selectedCaseStudy.challenge}
+                  </p>
+                </div>
+
+                <div className="space-y-2">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">Action Plan & Execution</h4>
+                  <ul className="space-y-2">
+                    {selectedCaseStudy.strategy.map((item, idx) => (
+                      <li key={idx} className="text-xs text-slate-700 dark:text-slate-300 flex items-start gap-2">
+                        <span className="w-4 h-4 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5">
+                          {idx + 1}
+                        </span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="space-y-2">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">Delivered Results & ROI</h4>
+                  <div className="space-y-2">
+                    {selectedCaseStudy.results.map((res, idx) => (
+                      <div key={idx} className="p-2.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-100 dark:border-emerald-900/50 text-xs font-semibold text-emerald-900 dark:text-emerald-200 flex items-center gap-2">
+                        <i data-lucide="check-circle" className="w-4 h-4 text-emerald-500 shrink-0"></i>
+                        <span>{res}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex justify-end">
+                  <button 
+                    onClick={() => setSelectedCaseStudy(null)}
+                    className="px-4 py-2 text-xs font-semibold rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 transition"
+                  >
+                    Close Case Study
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Full Resume View & Print Modal */}
+          {showResumeModal && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
+              <div className="bg-white dark:bg-navy-900 rounded-2xl max-w-3xl w-full p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-6 max-h-[92vh] overflow-y-auto custom-scrollbar">
+                
+                {/* Modal Header */}
+                <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4">
+                  <div className="flex items-center gap-2">
+                    <i data-lucide="file-text" className="w-5 h-5 text-emerald-500"></i>
+                    <h3 className="font-bold text-slate-900 dark:text-white text-lg">Executive Retail Resume</h3>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button 
+                      onClick={() => window.print()}
+                      className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white flex items-center gap-1.5 transition"
+                    >
+                      <i data-lucide="printer" className="w-3.5 h-3.5"></i>
+                      Print / Save as PDF
+                    </button>
+                    <button 
+                      onClick={() => setShowResumeModal(false)}
+                      className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+                    >
+                      <i data-lucide="x" className="w-5 h-5"></i>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Printable Resume Container */}
+                <div id="printable-resume" className="space-y-6 p-4 sm:p-6 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100">
+                  <div className="border-b border-slate-200 dark:border-slate-800 pb-4">
+                    <h2 className="text-2xl font-bold text-slate-900 dark:text-white">{portfolioData.personal.name}</h2>
+                    <div className="text-emerald-600 dark:text-emerald-400 font-bold text-sm">{portfolioData.personal.roleTitle}</div>
+                    <div className="text-xs text-slate-500 dark:text-slate-400 mt-1 flex flex-wrap gap-3">
+                      <span>{portfolioData.personal.location}</span>
+                      <span>&bull;</span>
+                      <span>{portfolioData.personal.email}</span>
+                      <span>&bull;</span>
+                      <span>{portfolioData.personal.phone}</span>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-800 pb-1 mb-2">Executive Summary</h4>
+                    <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">{portfolioData.executiveSummary}</p>
+                  </div>
+
+                  <div>
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-800 pb-1 mb-3">Core Retail Competencies</h4>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px] text-slate-700 dark:text-slate-300">
+                      <div>&bull; P&L / EBITDA Growth</div>
+                      <div>&bull; Shrinkage Mitigation (0.52%)</div>
+                      <div>&bull; Payroll & Labor Control</div>
+                      <div>&bull; Team Coaching & Retention</div>
+                      <div>&bull; Visual Merchandising (5S)</div>
+                      <div>&bull; BOPIS / Omnichannel Ops</div>
+                      <div>&bull; Cycle Counts & Audits</div>
+                      <div>&bull; VIP Clienteling & NPS (92)</div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-800 pb-1 mb-3">Work Experience</h4>
+                    <div className="space-y-4">
+                      {portfolioData.experience.map((exp, idx) => (
+                        <div key={idx} className="space-y-1">
+                          <div className="flex justify-between text-xs font-bold">
+                            <span className="text-slate-900 dark:text-white">{exp.role} — <span className="font-semibold text-emerald-600 dark:text-emerald-400">{exp.company}</span></span>
+                            <span className="text-slate-500 dark:text-slate-400">{exp.period}</span>
+                          </div>
+                          <div className="text-[11px] text-slate-500 dark:text-slate-400 italic">{exp.location} | {exp.metrics}</div>
+                          <ul className="list-disc list-inside text-xs text-slate-700 dark:text-slate-300 space-y-0.5 pt-1">
+                            {exp.highlights.map((hl, hIdx) => (
+                              <li key={hIdx} className="leading-relaxed">{hl}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-800 pb-1 mb-2">Education & Certifications</h4>
+                    <div className="grid sm:grid-cols-2 gap-2 text-xs text-slate-700 dark:text-slate-300">
+                      {portfolioData.education.map((edu, idx) => (
+                        <div key={idx}>
+                          <span className="font-semibold text-slate-900 dark:text-white">{edu.title}</span> &bull; {edu.org} ({edu.year})
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          )}
+
+        </div>
+      );
+    }
+
+    // Render the React application
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>
+

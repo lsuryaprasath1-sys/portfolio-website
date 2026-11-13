@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Surya Prasath | Store Manager - Quick Commerce & Dark Store Operations</title>
+  
+  <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- React 18 & Babel Standalone -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+          },
+          colors: {
+            accent: {
+              DEFAULT: '#fd6f00',
+              hover: '#e05e00',
+              light: '#ff8533',
+              glow: 'rgba(253, 111, 0, 0.25)'
+            },
+            dark: {
+              900: '#121212',
+              850: '#181818',
+              800: '#1e1e1e',
+              750: '#252525',
+              700: '#2d2d2d'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #121212;
+      color: #e5e7eb;
+    }
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #printable-resume, #printable-resume * {
+        visibility: visible;
+      }
+      #printable-resume {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        background: white !important;
+        color: black !important;
+      }
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #181818;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #fd6f00;
+      border-radius: 9999px;
+    }
+    .glow-orange {
+      box-shadow: 0 0 30px rgba(253, 111, 0, 0.2);
+    }
+    .glow-orange-lg {
+      box-shadow: 0 0 60px rgba(253, 111, 0, 0.25);
+    }
+  </style>
+</head>
+<body class="bg-dark-900 text-slate-200 antialiased selection:bg-accent selection:text-white custom-scrollbar">
+  <div id="root"></div>
+
+  <!-- React Application Script -->
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    const suryaData = {
+      personal: {
+        name: "Surya Prasath",
+        fullName: "L. Surya Prasath",
+        greeting: "Hi I am",
+        roleHighlight: "Store Manager",
+        roleSubtitle: "Quick Commerce & Dark Store Operations",
+        headline: "Results-driven Store Manager with 2+ years of experience in fast-paced Quick Commerce dark stores (Swiggy Instamart, Blinkit, Shadowfax).",
+        location: "Chennai, Tamil Nadu, India",
+        email: "l.suryaprasath1@gmail.com",
+        phone: "+91 6382799407",
+        whatsapp: "https://wa.me/916382799407",
+        linkedin: "https://www.linkedin.com/in/surya-prasath-65b79837b/",
+        experienceYears: "2+",
+        dailyOrders: "1,800+",
+        accuracy: "99.8%",
+        tat: "< 2.2 min",
+        shrinkage: "< 0.25%",
+        imagePath: "./surya-prasath.jpg?v=2"
+      },
+
+      statsCard: [
+        { value: "2+", label: "Experiences", sub: "Years in Quick Commerce" },
+        { value: "1,800+", label: "Daily Orders", sub: "Handled at Peak Rushes" },
+        { value: "99.8%", label: "Inventory Accuracy", sub: "Strict FIFO Protocols" }
+      ],
+
+      services: [
+        {
+          id: 1,
+          icon: "zap",
+          title: "Dark Store Operations",
+          desc: "End-to-end management of micro-fulfillment hubs, ensuring swift 10-minute order turnaround, opening/closing checklists, and floor discipline."
+        },
+        {
+          id: 2,
+          icon: "refresh-cw",
+          title: "FIFO Inventory Control",
+          desc: "Rigorous First-In, First-Out protocols across 4,500+ SKUs, minimizing perishable wastage, cold-chain violations, and stock write-offs."
+        },
+        {
+          id: 3,
+          icon: "shopping-bag",
+          title: "Pick & Pack Optimization",
+          desc: "Slashing picker turnaround time to under 2.2 minutes via golden-zone product slotting, handheld RF terminals, and wave picking."
+        },
+        {
+          id: 4,
+          icon: "users",
+          title: "Manpower & Rostering",
+          desc: "Leading 35+ floor personnel, scheduling dynamic shift rosters based on order heatmaps, coaching pickers, and reducing attrition."
+        },
+        {
+          id: 5,
+          icon: "truck",
+          title: "Logistics & Fleet Dispatch",
+          desc: "Coordinating dock freight inbounds (&lt;45 min turnaround) and rapid rider handovers (&lt;30s) to guarantee last-mile SLA delivery."
+        },
+        {
+          id: 6,
+          icon: "trending-up",
+          title: "Performance & Ops Analytics",
+          desc: "Compiling daily operational reports (DSR), monitoring cancellation metrics, shrinkage audits, and implementing corrective root-cause actions."
+        }
+      ],
+
+      workflowSteps: [
+        {
+          step: "01",
+          title: "Inbound Receiving & QC",
+          time: "Dock to Rack",
+          icon: "truck",
+          desc: "Instant dock unloading, barcode scanning, quality check on fresh produce and dairy, with strict batch-code logging."
+        },
+        {
+          step: "02",
+          title: "FIFO Slotting & Putaway",
+          time: "Stock Rotation",
+          icon: "refresh-cw",
+          desc: "Dynamic aisle binning following First-In-First-Out to eliminate shelf-life decay and speed up picking pathways."
+        },
+        {
+          step: "03",
+          title: "High-Speed Batch Picking",
+          time: "< 90 Seconds",
+          icon: "shopping-bag",
+          desc: "Optimized route navigation via handheld terminals ensuring 100% item accuracy with zero out-of-stock cancellations."
+        },
+        {
+          step: "04",
+          title: "QC Pack & Bag Tagging",
+          time: "< 45 Seconds",
+          icon: "package-check",
+          desc: "Barcode verification, temperature-sensitive ice-pack packaging, and tamper-evident sealing."
+        },
+        {
+          step: "05",
+          title: "Rider Dispatch & Handover",
+          time: "< 30 Seconds",
+          icon: "zap",
+          desc: "Instant handover to Swiggy/Blinkit fleet riders for rapid last-mile delivery within customer SLA."
+        }
+      ],
+
+      caseStudies: [
+        {
+          id: 1,
+          title: "Slashing Pick & Pack TAT Under 2.2 Minutes at Peak Demand",
+          badge: "Speed Optimization",
+          company: "Swiggy Instamart",
+          subtitle: "Optimizing store layout and picker travel paths to handle 1,800+ orders daily.",
+          challenge: "During weekend evening surges, customer orders spiked by 250%, causing picking bottlenecks, rider wait times outside the store, and breached 10-minute delivery SLAs.",
+          strategy: [
+            "Analyzed heatmaps of the top 150 fast-moving SKUs (milk, bread, snacks, beverages) and relocated them to the primary pick station.",
+            "Divided store floor into 3 dedicated picking zones with assigned specialist pickers.",
+            "Introduced a quick-staging barcode verification rack right next to the rider dispatch counter.",
+            "Instituted real-time visual alerts for orders pending for more than 75 seconds."
+          ],
+          results: [
+            "Reduced average pick-and-pack turnaround time from 3.4 minutes to 2.1 minutes.",
+            "Increased peak hourly order processing capacity by 38% without additional manpower.",
+            "Boosted on-time dispatch SLA adherence to a record 99.4%."
+          ]
+        },
+        {
+          id: 2,
+          title: "Eliminating Inventory Loss & Perishable Expiry via Strict FIFO",
+          badge: "Inventory Integrity",
+          company: "Blinkit",
+          subtitle: "Reducing dark store stock shrinkage from 0.72% to under 0.25%.",
+          challenge: "High SKU churn across dairy and fresh vegetables led to misplaced items, near-expiry dump write-offs, and stock mismatch discrepancies during night audits.",
+          strategy: [
+            "Mandated strict color-coded batch date labels on all inbound perishable crates.",
+            "Enforced standard FIFO shelf-stocking rules: newly arrived crates put behind older inventory.",
+            "Implemented twice-daily high-theft and dairy stock cycle counts using handheld barcode terminals.",
+            "Streamlined damaged product quarantine zones and expedited same-day RTV debit notes."
+          ],
+          results: [
+            "Dark store shrinkage dropped to 0.24%, among the lowest in the Chennai city cluster.",
+            "Zero customer escalations regarding expired products over 8 consecutive months.",
+            "Achieved 99.8% book-to-physical inventory reconciliation rate on monthly audits."
+          ]
+        },
+        {
+          id: 3,
+          title: "Fleet & Rider Dispatch Optimization During Monsoon Surges",
+          badge: "Logistics Excellence",
+          company: "Shadowfax & Quick Commerce",
+          subtitle: "Maintaining smooth order flow and rider handover under adverse weather conditions.",
+          challenge: "Heavy monsoon weather in Chennai caused delivery partner delays, stock receiving bottlenecks, and rider congestion at the dark store portal.",
+          strategy: [
+            "Coordinated closely with fleet operations to dynamically forecast rider requirements 2 hours in advance.",
+            "Created an undercover rapid order handoff zone to protect packages and riders from rain damage.",
+            "Pre-bagged standard impulse items and high-demand essentials for instant scanning.",
+            "Provided hot beverages and dry shelter for delivery partners, boosting partner availability by 30%."
+          ],
+          results: [
+            "Achieved 97.8% delivery SLA fulfillment even during peak monsoon rains.",
+            "Rider waiting time at the store decreased by 45%.",
+            "Zero weather-related in-transit packaging damages."
+          ]
+        }
+      ],
+
+      experience: [
+        {
+          role: "Store Manager",
+          company: "Swiggy (Swiggy Instamart)",
+          location: "Chennai, India",
+          period: "Aug 2026 – Present (Current)",
+          badge: "Current Leadership Role",
+          team: "35+ Personnel | 1,800+ Daily Orders",
+          description: "Direct end-to-end quick commerce dark store operations, managing inventory, team leadership, manpower planning, and operational performance. Ensure lightning-fast 10-minute grocery fulfillment while driving cost efficiency and zero customer complaints.",
+          highlights: [
+            "Lead end-to-end dark store operations, maintaining 99.4% on-time dispatch SLA across all delivery shifts.",
+            "Manage inventory health across 4,500+ SKUs with strict adherence to FIFO, cold-chain standards, and minimal shrinkage.",
+            "Plan weekly manpower rosters, shift scheduling, and productivity tracking for 35+ pickers and warehouse associates.",
+            "Monitor operational KPIs (Pick TAT, Inbound TAT, Cancellation Rate, Customer Complaints) and implement corrective actions."
+          ]
+        },
+        {
+          role: "Store Manager",
+          company: "Blinkit (Blink Commerce Private Limited)",
+          location: "Chennai, India",
+          period: "Aug 2024 – Aug 2026",
+          badge: "Quick Commerce Operations",
+          team: "28+ Store Associates | 1,400+ Daily Orders",
+          description: "Managed complete dark store operations, inventory accuracy, team leadership, and KPI improvement. Spearheaded employee training, hiring, process improvements, and high customer satisfaction.",
+          highlights: [
+            "Monitored key performance metrics including order fulfillment rate, pick & pack efficiency, and store productivity.",
+            "Reduced store inventory shrinkage to under 0.25% through rigorous daily cycle counts and barcode tracking.",
+            "Conducted end-to-end onboarding and operational coaching for new pickers and warehouse associates.",
+            "Managed inbound delivery intake, vendor dispute settlements, and Return-to-Vendor (RTV) processes with zero backlog."
+          ]
+        },
+        {
+          role: "Team Leader — Delivery & Fleet Operations",
+          company: "Shadowfax Private Limited",
+          location: "Chennai, India",
+          period: "2020 – 2021",
+          badge: "Logistics & Fleet Leadership",
+          team: "40+ Delivery Partners & Ops Staff",
+          description: "Supervised last-mile delivery operations, improved team performance, and ensured timely order fulfillment across assigned delivery hubs and departmental routes.",
+          highlights: [
+            "Oversaw daily last-mile dispatch operations to ensure efficiency, route productivity, and on-time order delivery.",
+            "Tracked rider delivery SLAs, route adherence, and daily payout metrics to drive high delivery partner engagement.",
+            "Prepared daily operational reports on team performance, order volume, and key performance indicators for senior management."
+          ]
+        }
+      ],
+
+      skills: [
+        { name: "Dark Store Operations", level: 96 },
+        { name: "Inventory Management & FIFO", level: 95 },
+        { name: "Pick & Pack TAT Optimization", level: 94 },
+        { name: "Manpower Planning & Rostering", level: 92 },
+        { name: "Loss Prevention & Shrinkage Control", level: 90 },
+        { name: "Warehouse 5S & Cold Chain", level: 92 }
+      ],
+
+      education: [
+        {
+          degree: "B.C.A. (Bachelor of Computer Applications)",
+          institution: "S.I.V.E.T. College",
+          location: "Gowrivakkam, Chennai",
+          year: "2024"
+        },
+        {
+          degree: "Higher Secondary (12th / HSC)",
+          institution: "Government Higher Secondary School",
+          location: "Sholinganallur, Chennai",
+          year: "2014 – 2020"
+        }
+      ],
+
+      languages: ["Tamil (Native)", "English (Fluent)"]
+    };
+
+    function App() {
+      const [activeTab, setActiveTab] = useState("home");
+      const [activeWorkflowStep, setActiveWorkflowStep] = useState(0);
+      const [selectedCaseStudy, setSelectedCaseStudy] = useState(null);
+      const [showResumeModal, setShowResumeModal] = useState(false);
+      const [contactSent, setContactSent] = useState(false);
+      const [contactForm, setContactForm] = useState({ name: "", email: "", message: "" });
+
+      useEffect(() => {
+        if (window.lucide) {
+          window.lucide.createIcons();
+        }
+      });
+
+      const handleContactSubmit = (e) => {
+        e.preventDefault();
+        setContactSent(true);
+        setTimeout(() => setContactSent(false), 5000);
+        setContactForm({ name: "", email: "", message: "" });
+      };
+
+      return (
+        <div className="min-h-screen bg-dark-900 text-slate-100 flex flex-col font-sans selection:bg-accent selection:text-white">
+          
+          {/* Main Top Bezel & Navigation Container */}
+          <header className="sticky top-0 z-50 backdrop-blur-md bg-dark-900/90 border-b border-dark-750">
+            <div className="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
+              
+              {/* Brand Logo matching the screenshot */}
+              <a href="#home" className="flex items-center gap-1 group">
+                <span className="text-xl font-extrabold tracking-wider text-white">SURYA</span>
+                <span className="w-2.5 h-2.5 rounded-full bg-accent inline-block animate-pulse"></span>
+              </a>
+
+              {/* Navigation Links matching mockup */}
+              <nav className="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <a 
+                  href="#home" 
+                  onClick={() => setActiveTab("home")}
+                  className={`transition-colors ${activeTab === 'home' ? 'text-accent font-semibold' : 'text-slate-300 hover:text-white'}`}
+                >
+                  Home
+                </a>
+                <a 
+                  href="#services" 
+                  onClick={() => setActiveTab("services")}
+                  className={`transition-colors ${activeTab === 'services' ? 'text-accent font-semibold' : 'text-slate-300 hover:text-white'}`}
+                >
+                  Services
+                </a>
+                <a 
+                  href="#about" 
+                  onClick={() => setActiveTab("about")}
+                  className={`transition-colors ${activeTab === 'about' ? 'text-accent font-semibold' : 'text-slate-300 hover:text-white'}`}
+                >
+                  About me
+                </a>
+                <a 
+                  href="#portfolio" 
+                  onClick={() => setActiveTab("portfolio")}
+                  className={`transition-colors ${activeTab === 'portfolio' ? 'text-accent font-semibold' : 'text-slate-300 hover:text-white'}`}
+                >
+                  Portfolio
+                </a>
+                <a 
+                  href="#contact" 
+                  onClick={() => setActiveTab("contact")}
+                  className={`transition-colors ${activeTab === 'contact' ? 'text-accent font-semibold' : 'text-slate-300 hover:text-white'}`}
+                >
+                  Contact me
+                </a>
+              </nav>
+
+              {/* Top Right "Hire Me" Button matching screenshot */}
+              <div className="flex items-center gap-3">
+                <button 
+                  onClick={() => setShowResumeModal(true)}
+                  className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold border border-dark-700 hover:border-slate-500 text-slate-300 hover:text-white transition"
+                >
+                  <i data-lucide="file-text" className="w-3.5 h-3.5 text-accent"></i>
+                  <span>Resume</span>
+                </button>
+
+                <a 
+                  href="#contact"
+                  className="px-6 py-2.5 rounded-lg bg-accent hover:bg-accent-hover text-white text-sm font-semibold shadow-md transition shadow-accent/20"
+                >
+                  Hire Me
+                </a>
+              </div>
+            </div>
+          </header>
+
+          {/* HERO SECTION matching the mockup image */}
+          <section id="home" className="relative pt-12 pb-20 lg:pt-20 lg:pb-32 overflow-hidden border-b border-dark-800">
+            {/* Subtle warm orange ambient light */}
+            <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-accent/10 rounded-full blur-[140px] pointer-events-none"></div>
+
+            <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+              <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+                
+                {/* Left Column: Headline, Bio & Actions */}
+                <div className="lg:col-span-7 space-y-6">
+                  
+                  {/* "Hi I am" + Name */}
+                  <div className="space-y-1">
+                    <span className="text-sm font-semibold tracking-wide text-slate-400">
+                      {suryaData.personal.greeting}
+                    </span>
+                    <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                      {suryaData.personal.name}
+                    </h2>
+                  </div>
+
+                  {/* Huge Bold Title in Vibrant Orange matching screenshot */}
+                  <div>
+                    <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-accent leading-[1.05] tracking-tight">
+                      {suryaData.personal.roleHighlight}
+                    </h1>
+                    <div className="text-lg sm:text-xl font-medium text-slate-300 mt-2">
+                      {suryaData.personal.roleSubtitle}
+                    </div>
+                  </div>
+
+                  {/* Social / Direct Connect Icons matching circular outline pills */}
+                  <div className="flex items-center gap-3 pt-2">
+                    <a 
+                      href={suryaData.personal.whatsapp} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      title="WhatsApp"
+                      className="w-10 h-10 rounded-full border border-dark-700 bg-dark-800 hover:border-accent hover:text-accent flex items-center justify-center text-slate-300 transition"
+                    >
+                      <i data-lucide="message-circle" className="w-4 h-4"></i>
+                    </a>
+                    <a 
+                      href={`tel:${suryaData.personal.phone}`} 
+                      title="Call"
+                      className="w-10 h-10 rounded-full border border-dark-700 bg-dark-800 hover:border-accent hover:text-accent flex items-center justify-center text-slate-300 transition"
+                    >
+                      <i data-lucide="phone" className="w-4 h-4"></i>
+                    </a>
+                    <a 
+                      href={`mailto:${suryaData.personal.email}`} 
+                      title="Email"
+                      className="w-10 h-10 rounded-full border border-dark-700 bg-dark-800 hover:border-accent hover:text-accent flex items-center justify-center text-slate-300 transition"
+                    >
+                      <i data-lucide="mail" className="w-4 h-4"></i>
+                    </a>
+                    <a 
+                      href={suryaData.personal.linkedin} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      title="LinkedIn"
+                      className="w-10 h-10 rounded-full border border-dark-700 bg-dark-800 hover:border-accent hover:text-accent flex items-center justify-center text-slate-300 transition"
+                    >
+                      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                      </svg>
+                    </a>
+                  </div>
+
+                  {/* Two Main Action Buttons matching screenshot */}
+                  <div className="flex flex-wrap items-center gap-4 pt-2">
+                    <a 
+                      href="#contact" 
+                      className="px-7 py-3 rounded-lg bg-accent hover:bg-accent-hover text-white font-semibold text-sm shadow-lg shadow-accent/25 transition"
+                    >
+                      Hire Me
+                    </a>
+                    <button 
+                      onClick={() => setShowResumeModal(true)}
+                      className="px-7 py-3 rounded-lg border border-dark-700 hover:border-slate-400 bg-dark-800/80 hover:bg-dark-750 text-white font-semibold text-sm transition flex items-center gap-2"
+                    >
+                      <i data-lucide="download" className="w-4 h-4 text-accent"></i>
+                      <span>Download CV</span>
+                    </button>
+                  </div>
+
+                  {/* Bottom Stats Floating Card matching screenshot */}
+                  <div className="pt-6">
+                    <div className="rounded-2xl bg-dark-850/80 border border-dark-750 backdrop-blur-md p-5 sm:p-6 grid grid-cols-3 gap-4 shadow-xl">
+                      {suryaData.statsCard.map((st, idx) => (
+                        <div key={idx} className="space-y-0.5">
+                          <div className="text-2xl sm:text-3xl font-extrabold text-accent">
+                            {st.value}
+                          </div>
+                          <div className="text-xs font-semibold text-white">
+                            {st.label}
+                          </div>
+                          <div className="text-[11px] text-slate-400 hidden sm:block">
+                            {st.sub}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                </div>
+
+                {/* Right Column: Full Pose Portrait — seamless blend like the reference mockup */}
+                <div className="lg:col-span-5 flex justify-center lg:justify-end items-end relative">
+                  <div className="relative w-full max-w-[420px] sm:max-w-[480px] flex items-end justify-center" style={{isolation:'isolate'}}>
+
+                    {/* Dark circular disc — sits at 60% height, behind person's torso */}
+                    <div style={{
+                      position:'absolute',
+                      bottom:'0px',
+                      left:'50%',
+                      transform:'translateX(-50%)',
+                      width:'78%',
+                      paddingBottom:'78%',
+                      borderRadius:'50%',
+                      background:'radial-gradient(ellipse at center, #2c2c2c 0%, #1a1a1a 60%, #121212 100%)',
+                      zIndex:1
+                    }}></div>
+
+                    {/* Person photo: mix-blend-mode:screen makes the dark studio BG disappear into the page */}
+                    <div className="relative w-full flex items-end justify-center" style={{zIndex:2}}>
+                      <img
+                        src="./surya-prasath.jpg"
+                        alt="Surya Prasath - Store Manager"
+                        style={{
+                          width:'100%',
+                          maxHeight:'600px',
+                          objectFit:'contain',
+                          objectPosition:'bottom',
+                          mixBlendMode:'screen',
+                          filter:'grayscale(100%) contrast(1.15) brightness(1.08)',
+                          display:'block',
+                          WebkitMaskImage:'radial-gradient(ellipse 72% 88% at 50% 58%, black 42%, transparent 78%)',
+                          maskImage:'radial-gradient(ellipse 72% 88% at 50% 58%, black 42%, transparent 78%)'
+                        }}
+                      />
+                    </div>
+
+                    {/* Floating verified badge */}
+                    <div className="absolute bottom-4 right-2 sm:right-4 z-20 px-3.5 py-1.5 rounded-full bg-dark-800/90 border border-dark-700 text-xs font-semibold text-slate-200 shadow-2xl flex items-center gap-1.5 backdrop-blur-md">
+                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                      <span>Swiggy Instamart</span>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </section>
+
+          {/* SERVICES SECTION */}
+          <section id="services" className="py-20 bg-dark-850 border-b border-dark-800">
+            <div className="max-w-7xl mx-auto px-6 lg:px-12">
+              <div className="max-w-2xl mx-auto text-center mb-14 space-y-2">
+                <span className="text-xs font-bold uppercase tracking-widest text-accent">
+                  What I Deliver
+                </span>
+                <h2 className="text-3xl sm:text-4xl font-extrabold text-white">
+                  Services & Core Capabilities
+                </h2>
+                <p className="text-sm text-slate-400">
+                  Specialized leadership for high-speed dark stores, micro-fulfillment centers, and last-mile logistics hubs.
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {suryaData.services.map((svc) => (
+                  <div 
+                    key={svc.id} 
+                    className="p-6 rounded-2xl bg-dark-800 border border-dark-750 hover:border-accent/60 transition duration-300 space-y-4 group"
+                  >
+                    <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/20 text-accent flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <i data-lucide={svc.icon} className="w-6 h-6"></i>
+                    </div>
+                    <h3 className="text-lg font-bold text-white group-hover:text-accent transition-colors">
+                      {svc.title}
+                    </h3>
+                    <p className="text-xs text-slate-400 leading-relaxed">
+                      {svc.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* ABOUT ME SECTION */}
+          <section id="about" className="py-20 bg-dark-900 border-b border-dark-800">
+            <div className="max-w-7xl mx-auto px-6 lg:px-12">
+              <div className="grid lg:grid-cols-12 gap-12 items-center">
+                
+                {/* Left: Bio & Highlights */}
+                <div className="lg:col-span-7 space-y-6">
+                  <div>
+                    <span className="text-xs font-bold uppercase tracking-widest text-accent">
+                      About Me
+                    </span>
+                    <h2 className="text-3xl sm:text-4xl font-extrabold text-white mt-1">
+                      2+ Years Driving High-Velocity Store Operations
+                    </h2>
+                  </div>
+
+                  <p className="text-sm text-slate-300 leading-relaxed">
+                    Dedicated, metrics-driven Store Manager currently steering high-volume dark store operations at 
+                    <strong className="text-accent"> Swiggy Instamart</strong> in Chennai. Previously managed fast-paced grocery operations at 
+                    <strong className="text-accent"> Blinkit</strong> and delivery team leadership at 
+                    <strong className="text-accent"> Shadowfax</strong>.
+                  </p>
+
+                  <p className="text-sm text-slate-400 leading-relaxed">
+                    Proven track record in optimizing pick-and-pack turnaround times, eliminating inventory shrinkage through strict FIFO protocols, and inspiring 35+ floor associates to achieve consistent 99.4% on-time dispatch SLAs. Aspiring Cluster Manager and Area Operations Leader.
+                  </p>
+
+                  {/* Quick Details Grid */}
+                  <div className="grid sm:grid-cols-2 gap-3 pt-2 text-xs">
+                    <div className="p-3 rounded-xl bg-dark-800 border border-dark-750 space-y-1">
+                      <div className="text-slate-400">Education</div>
+                      <div className="font-semibold text-white">B.C.A., S.I.V.E.T. College (2024)</div>
+                    </div>
+                    <div className="p-3 rounded-xl bg-dark-800 border border-dark-750 space-y-1">
+                      <div className="text-slate-400">Schooling</div>
+                      <div className="font-semibold text-white">Govt Hr Sec School, Sholinganallur</div>
+                    </div>
+                    <div className="p-3 rounded-xl bg-dark-800 border border-dark-750 space-y-1">
+                      <div className="text-slate-400">Languages</div>
+                      <div className="font-semibold text-white">Tamil (Native), English (Fluent)</div>
+                    </div>
+                    <div className="p-3 rounded-xl bg-dark-800 border border-dark-750 space-y-1">
+                      <div className="text-slate-400">Location</div>
+                      <div className="font-semibold text-white">Chennai, Tamil Nadu, India</div>
+                    </div>
+                  </div>
+
+                  <div className="pt-2">
+                    <button 
+                      onClick={() => setShowResumeModal(true)}
+                      className="px-6 py-2.5 rounded-lg bg-accent hover:bg-accent-hover text-white text-xs font-semibold shadow-md transition"
+                    >
+                      View Complete Resume &rarr;
+                    </button>
+                  </div>
+                </div>
+
+                {/* Right: Technical Competencies / Progress Bars */}
+                <div className="lg:col-span-5 p-6 rounded-2xl bg-dark-800 border border-dark-750 space-y-5">
+                  <h3 className="text-base font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                    <i data-lucide="activity" className="w-4 h-4 text-accent"></i>
+                    Execution Benchmarks
+                  </h3>
+
+                  <div className="space-y-4">
+                    {suryaData.skills.map((sk, idx) => (
+                      <div key={idx} className="space-y-1.5">
+                        <div className="flex justify-between text-xs font-medium">
+                          <span className="text-slate-200">{sk.name}</span>
+                          <span className="text-accent font-bold">{sk.level}%</span>
+                        </div>
+                        <div className="w-full bg-dark-900 h-2 rounded-full overflow-hidden">
+                          <div 
+                            className="bg-accent h-full rounded-full transition-all duration-700" 
+                            style={{ width: `${sk.level}%` }}
+                          ></div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="pt-2 border-t border-dark-700 flex items-center justify-between text-[11px] text-slate-400">
+                    <span>Audit Ready Standards</span>
+                    <span className="text-accent font-semibold">&bull; Swiggy & Blinkit Protocols</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </section>
+
+          {/* PORTFOLIO / CASE STUDIES & WORKFLOW SECTION */}
+          <section id="portfolio" className="py-20 bg-dark-850 border-b border-dark-800">
+            <div className="max-w-7xl mx-auto px-6 lg:px-12 space-y-16">
+              
+              {/* Header */}
+              <div className="max-w-2xl mx-auto text-center space-y-2">
+                <span className="text-xs font-bold uppercase tracking-widest text-accent">
+                  Portfolio & Wins
+                </span>
+                <h2 className="text-3xl sm:text-4xl font-extrabold text-white">
+                  Dark Store Workflow & Case Studies
+                </h2>
+                <p className="text-sm text-slate-400">
+                  Interactive operational walkthroughs and documented turnaround impact.
+                </p>
+              </div>
+
+              {/* 10-Minute Dark Store Lifecycle Simulator */}
+              <div className="p-6 sm:p-8 rounded-2xl bg-dark-800 border border-dark-750 space-y-6">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-dark-700 pb-4">
+                  <div>
+                    <h3 className="text-lg font-bold text-white">
+                      10-Minute Instant Fulfillment Pipeline
+                    </h3>
+                    <p className="text-xs text-slate-400">Click a stage to inspect the operational SLA and execution standard:</p>
+                  </div>
+                  <span className="text-xs font-semibold px-3 py-1 rounded-full bg-accent/10 border border-accent/30 text-accent self-start sm:self-auto">
+                    Average Store TAT: &lt; 2.2 Min
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
+                  {suryaData.workflowSteps.map((wf, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setActiveWorkflowStep(idx)}
+                      className={`p-3.5 rounded-xl text-left border transition ${
+                        activeWorkflowStep === idx 
+                          ? 'bg-accent/15 border-accent text-white shadow-lg shadow-accent/10' 
+                          : 'bg-dark-900 border-dark-750 text-slate-400 hover:border-slate-600'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between text-xs font-bold mb-1">
+                        <span className={activeWorkflowStep === idx ? 'text-accent' : 'text-slate-500'}>
+                          Step {wf.step}
+                        </span>
+                        <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-dark-800 text-slate-300">
+                          {wf.time}
+                        </span>
+                      </div>
+                      <div className="text-xs font-bold text-white truncate">
+                        {wf.title}
+                      </div>
+                    </button>
+                  ))}
+                </div>
+
+                <div className="p-5 rounded-xl bg-dark-900 border border-dark-750 flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-accent text-white flex items-center justify-center shrink-0">
+                    <i data-lucide={suryaData.workflowSteps[activeWorkflowStep].icon} className="w-6 h-6"></i>
+                  </div>
+                  <div>
+                    <div className="text-xs font-bold text-accent uppercase tracking-wider">
+                      Stage {suryaData.workflowSteps[activeWorkflowStep].step} Focus &bull; Target: {suryaData.workflowSteps[activeWorkflowStep].time}
+                    </div>
+                    <div className="text-sm font-bold text-white mt-0.5">
+                      {suryaData.workflowSteps[activeWorkflowStep].title}
+                    </div>
+                    <p className="text-xs text-slate-300 mt-1 leading-relaxed">
+                      {suryaData.workflowSteps[activeWorkflowStep].desc}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Real World Turnaround Case Studies Grid */}
+              <div className="grid md:grid-cols-3 gap-6">
+                {suryaData.caseStudies.map((study) => (
+                  <div 
+                    key={study.id} 
+                    className="p-6 rounded-2xl bg-dark-800 border border-dark-750 hover:border-accent/50 transition flex flex-col justify-between space-y-4"
+                  >
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between text-xs">
+                        <span className="px-2.5 py-0.5 rounded-full bg-accent/15 text-accent font-semibold border border-accent/20">
+                          {study.badge}
+                        </span>
+                        <span className="text-slate-400 font-medium">{study.company}</span>
+                      </div>
+
+                      <h3 className="text-base font-bold text-white leading-snug">
+                        {study.title}
+                      </h3>
+
+                      <p className="text-xs text-slate-400 line-clamp-3 leading-relaxed">
+                        {study.challenge}
+                      </p>
+
+                      <div className="p-3 rounded-xl bg-dark-900 border border-dark-750 text-xs">
+                        <span className="text-accent font-bold">Outcome: </span>
+                        <span className="text-slate-200">{study.results[0]}</span>
+                      </div>
+                    </div>
+
+                    <button 
+                      onClick={() => setSelectedCaseStudy(study)}
+                      className="w-full py-2.5 px-3 rounded-lg bg-dark-750 hover:bg-accent hover:text-white text-xs font-semibold text-slate-200 transition flex items-center justify-center gap-1.5"
+                    >
+                      <span>Read Full Strategy</span>
+                      <i data-lucide="arrow-right" className="w-3.5 h-3.5"></i>
+                    </button>
+                  </div>
+                ))}
+              </div>
+
+            </div>
+          </section>
+
+          {/* CAREER TIMELINE */}
+          <section className="py-20 bg-dark-900 border-b border-dark-800">
+            <div className="max-w-7xl mx-auto px-6 lg:px-12">
+              <div className="max-w-2xl mx-auto text-center mb-14 space-y-2">
+                <span className="text-xs font-bold uppercase tracking-widest text-accent">
+                  Leadership Path
+                </span>
+                <h2 className="text-3xl sm:text-4xl font-extrabold text-white">
+                  Work Experience
+                </h2>
+              </div>
+
+              <div className="max-w-4xl mx-auto space-y-6">
+                {suryaData.experience.map((exp, idx) => (
+                  <div key={idx} className="p-6 rounded-2xl bg-dark-800 border border-dark-750 space-y-3">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 border-b border-dark-700 pb-3">
+                      <div>
+                        <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                          {exp.role}
+                          <span className="text-xs font-semibold px-2 py-0.5 rounded bg-accent/20 text-accent">
+                            {exp.badge}
+                          </span>
+                        </h3>
+                        <div className="text-xs font-semibold text-accent mt-0.5">
+                          {exp.company} &bull; <span className="text-slate-400 font-normal">{exp.location}</span>
+                        </div>
+                      </div>
+                      <span className="text-xs text-slate-400 font-mono">{exp.period}</span>
+                    </div>
+
+                    <p className="text-xs text-slate-300 leading-relaxed">
+                      {exp.description}
+                    </p>
+
+                    <ul className="space-y-1.5 pt-1">
+                      {exp.highlights.map((hl, hIdx) => (
+                        <li key={hIdx} className="text-xs text-slate-300 flex items-start gap-2">
+                          <span className="text-accent font-bold">&bull;</span>
+                          <span>{hl}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* CONTACT ME SECTION */}
+          <section id="contact" className="py-20 bg-dark-850">
+            <div className="max-w-7xl mx-auto px-6 lg:px-12">
+              <div className="grid lg:grid-cols-12 gap-12 items-start">
+                
+                {/* Contact Information */}
+                <div className="lg:col-span-5 space-y-6">
+                  <div>
+                    <span className="text-xs font-bold uppercase tracking-widest text-accent">
+                      Connect
+                    </span>
+                    <h2 className="text-3xl sm:text-4xl font-extrabold text-white mt-1">
+                      Contact Me
+                    </h2>
+                    <p className="text-sm text-slate-400 mt-2 leading-relaxed">
+                      Available for Store General Manager, Dark Store Operations, Cluster Manager, and Area Operations roles across Chennai and Tamil Nadu.
+                    </p>
+                  </div>
+
+                  <div className="space-y-3 pt-2">
+                    <a 
+                      href={suryaData.personal.whatsapp}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-4 rounded-xl bg-dark-800 border border-dark-700 hover:border-accent flex items-center justify-between transition group"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-lg bg-emerald-600 text-white flex items-center justify-center">
+                          <i data-lucide="message-circle" className="w-5 h-5"></i>
+                        </div>
+                        <div>
+                          <div className="text-xs font-semibold text-slate-400">WhatsApp Chat</div>
+                          <div className="text-sm font-bold text-white">+91 6382799407</div>
+                        </div>
+                      </div>
+                      <i data-lucide="arrow-right" className="w-4 h-4 text-slate-400 group-hover:text-accent transition"></i>
+                    </a>
+
+                    <div className="p-4 rounded-xl bg-dark-800 border border-dark-700 flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-accent text-white flex items-center justify-center">
+                        <i data-lucide="phone" className="w-5 h-5"></i>
+                      </div>
+                      <div>
+                        <div className="text-xs font-semibold text-slate-400">Direct Phone</div>
+                        <a href={`tel:${suryaData.personal.phone}`} className="text-sm font-bold text-white hover:text-accent transition">
+                          {suryaData.personal.phone}
+                        </a>
+                      </div>
+                    </div>
+
+                    <div className="p-4 rounded-xl bg-dark-800 border border-dark-700 flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-dark-750 text-accent flex items-center justify-center border border-dark-700">
+                        <i data-lucide="mail" className="w-5 h-5"></i>
+                      </div>
+                      <div>
+                        <div className="text-xs font-semibold text-slate-400">Email Address</div>
+                        <a href={`mailto:${suryaData.personal.email}`} className="text-sm font-bold text-white hover:text-accent transition">
+                          {suryaData.personal.email}
+                        </a>
+                      </div>
+                    </div>
+
+                    <div className="p-4 rounded-xl bg-dark-800 border border-dark-700 flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-dark-750 text-accent flex items-center justify-center border border-dark-700">
+                        <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                      </div>
+                      <div>
+                        <div className="text-xs font-semibold text-slate-400">LinkedIn Profile</div>
+                        <a href={suryaData.personal.linkedin} target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-white hover:text-accent transition">
+                          linkedin.com/in/surya-prasath-65b79837b
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Direct Message Form */}
+                <div className="lg:col-span-7">
+                  <div className="p-8 rounded-2xl bg-dark-800 border border-dark-750 shadow-xl space-y-4">
+                    <h3 className="text-lg font-bold text-white">Send a Message</h3>
+
+                    {contactSent && (
+                      <div className="p-3.5 rounded-xl bg-accent/20 border border-accent text-xs text-white flex items-center gap-2">
+                        <i data-lucide="check-circle" className="w-4 h-4 text-accent"></i>
+                        Thank you! Your message has been sent to Surya Prasath.
+                      </div>
+                    )}
+
+                    <form onSubmit={handleContactSubmit} className="space-y-4">
+                      <div className="grid sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-xs font-semibold text-slate-400 mb-1">Your Name</label>
+                          <input 
+                            type="text" 
+                            required
+                            placeholder="Recruiter / Operations Lead"
+                            value={contactForm.name}
+                            onChange={(e) => setContactForm({...contactForm, name: e.target.value})}
+                            className="w-full px-4 py-2.5 rounded-lg bg-dark-900 border border-dark-700 text-white text-sm focus:outline-none focus:border-accent"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-semibold text-slate-400 mb-1">Email</label>
+                          <input 
+                            type="email" 
+                            required
+                            placeholder="lead@company.com"
+                            value={contactForm.email}
+                            onChange={(e) => setContactForm({...contactForm, email: e.target.value})}
+                            className="w-full px-4 py-2.5 rounded-lg bg-dark-900 border border-dark-700 text-white text-sm focus:outline-none focus:border-accent"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-semibold text-slate-400 mb-1">Message</label>
+                        <textarea 
+                          rows="4" 
+                          required
+                          placeholder="Store location, order volume requirements, or interview schedule..."
+                          value={contactForm.message}
+                          onChange={(e) => setContactForm({...contactForm, message: e.target.value})}
+                          className="w-full px-4 py-2.5 rounded-lg bg-dark-900 border border-dark-700 text-white text-sm focus:outline-none focus:border-accent resize-none"
+                        ></textarea>
+                      </div>
+
+                      <button 
+                        type="submit"
+                        className="w-full py-3 rounded-lg bg-accent hover:bg-accent-hover text-white font-bold text-sm shadow-md transition"
+                      >
+                        Send Message
+                      </button>
+                    </form>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </section>
+
+          {/* FOOTER */}
+          <footer className="py-8 bg-dark-900 border-t border-dark-800 text-xs text-slate-500">
+            <div className="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div>
+                <span className="font-bold text-white">{suryaData.personal.fullName}</span> &bull; Store Manager Portfolio
+              </div>
+              <div className="flex items-center gap-4">
+                <button onClick={() => setShowResumeModal(true)} className="hover:text-accent transition">Download CV</button>
+                <span>&bull;</span>
+                <a href="#home" className="hover:text-accent transition">Back to Top &uarr;</a>
+              </div>
+            </div>
+          </footer>
+
+          {/* CASE STUDY MODAL */}
+          {selectedCaseStudy && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fade-in">
+              <div className="bg-dark-800 rounded-2xl max-w-2xl w-full p-6 sm:p-8 border border-dark-700 shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto custom-scrollbar">
+                <div className="flex items-center justify-between border-b border-dark-700 pb-4">
+                  <span className="px-2.5 py-1 text-xs font-bold rounded-full bg-accent/20 text-accent">
+                    {selectedCaseStudy.badge} &bull; {selectedCaseStudy.company}
+                  </span>
+                  <button onClick={() => setSelectedCaseStudy(null)} className="text-slate-400 hover:text-white">
+                    <i data-lucide="x" className="w-5 h-5"></i>
+                  </button>
+                </div>
+
+                <div>
+                  <h3 className="text-xl font-bold text-white">{selectedCaseStudy.title}</h3>
+                  <p className="text-xs text-slate-400 mt-1">{selectedCaseStudy.subtitle}</p>
+                </div>
+
+                <div className="space-y-1">
+                  <div className="text-xs font-bold uppercase tracking-wider text-slate-400">Problem</div>
+                  <p className="text-xs text-slate-300 leading-relaxed bg-dark-900 p-3 rounded-xl border border-dark-750">
+                    {selectedCaseStudy.challenge}
+                  </p>
+                </div>
+
+                <div className="space-y-2">
+                  <div className="text-xs font-bold uppercase tracking-wider text-accent">Action Plan</div>
+                  <ul className="space-y-1.5">
+                    {selectedCaseStudy.strategy.map((item, idx) => (
+                      <li key={idx} className="text-xs text-slate-300 flex items-start gap-2">
+                        <span className="text-accent font-bold">&bull;</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="space-y-2">
+                  <div className="text-xs font-bold uppercase tracking-wider text-accent">Results & ROI</div>
+                  <div className="space-y-1.5">
+                    {selectedCaseStudy.results.map((res, idx) => (
+                      <div key={idx} className="p-2.5 rounded-lg bg-dark-900 border border-dark-750 text-xs font-semibold text-slate-200 flex items-center gap-2">
+                        <i data-lucide="check-circle" className="w-4 h-4 text-accent shrink-0"></i>
+                        <span>{res}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="pt-4 border-t border-dark-700 flex justify-end">
+                  <button 
+                    onClick={() => setSelectedCaseStudy(null)}
+                    className="px-4 py-2 text-xs font-semibold rounded-lg bg-dark-750 hover:bg-dark-700 text-white transition"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* PRINTABLE RESUME MODAL */}
+          {showResumeModal && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fade-in">
+              <div className="bg-dark-800 rounded-2xl max-w-3xl w-full p-6 sm:p-8 border border-dark-700 shadow-2xl space-y-6 max-h-[92vh] overflow-y-auto custom-scrollbar">
+                <div className="flex items-center justify-between border-b border-dark-700 pb-4">
+                  <h3 className="font-bold text-white text-lg">Surya Prasath — Official CV</h3>
+                  <div className="flex items-center gap-2">
+                    <button 
+                      onClick={() => window.print()}
+                      className="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-accent hover:bg-accent-hover text-white flex items-center gap-1.5 transition"
+                    >
+                      <i data-lucide="printer" className="w-3.5 h-3.5"></i>
+                      Print / Save as PDF
+                    </button>
+                    <button onClick={() => setShowResumeModal(false)} className="text-slate-400 hover:text-white p-1">
+                      <i data-lucide="x" className="w-5 h-5"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div id="printable-resume" className="space-y-6 p-6 bg-dark-900 rounded-xl border border-dark-750 text-slate-100">
+                  <div className="border-b border-dark-700 pb-4 flex items-start justify-between">
+                    <div>
+                      <h2 className="text-2xl font-bold text-white">{suryaData.personal.fullName}</h2>
+                      <div className="text-accent font-bold text-sm">{suryaData.personal.roleHighlight} &bull; {suryaData.personal.roleSubtitle}</div>
+                      <div className="text-xs text-slate-400 mt-1 flex flex-wrap gap-3">
+                        <span>{suryaData.personal.location}</span>
+                        <span>&bull;</span>
+                        <span>{suryaData.personal.email}</span>
+                        <span>&bull;</span>
+                        <span>{suryaData.personal.phone}</span>
+                      </div>
+                    </div>
+                    <img 
+                      src={suryaData.personal.imagePath} 
+                      alt="Surya Prasath"
+                      className="w-16 h-16 rounded-xl object-cover object-top border border-dark-700"
+                    />
+                  </div>
+
+                  <div>
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-white border-b border-dark-700 pb-1 mb-2">Profile Summary</h4>
+                    <p className="text-xs text-slate-300 leading-relaxed">{suryaData.personal.headline}</p>
+                  </div>
+
+                  <div>
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-white border-b border-dark-700 pb-1 mb-3">Work Experience</h4>
+                    <div className="space-y-4">
+                      {suryaData.experience.map((exp, idx) => (
+                        <div key={idx} className="space-y-1">
+                          <div className="flex justify-between text-xs font-bold">
+                            <span className="text-white">{exp.role} — <span className="font-semibold text-accent">{exp.company}</span></span>
+                            <span className="text-slate-400">{exp.period}</span>
+                          </div>
+                          <div className="text-[11px] text-slate-400 italic">{exp.location} | {exp.team}</div>
+                          <ul className="list-disc list-inside text-xs text-slate-300 space-y-0.5 pt-1">
+                            {exp.highlights.map((hl, hIdx) => (
+                              <li key={hIdx} className="leading-relaxed">{hl}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-white border-b border-dark-700 pb-1 mb-2">Education</h4>
+                    <div className="space-y-1 text-xs text-slate-300">
+                      {suryaData.education.map((edu, idx) => (
+                        <div key={idx} className="flex justify-between">
+                          <span><strong>{edu.degree}</strong> &bull; {edu.institution}</span>
+                          <span className="text-slate-400">{edu.year}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          )}
+
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>
+
+
